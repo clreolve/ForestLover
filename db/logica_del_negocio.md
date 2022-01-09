@@ -1,5 +1,5 @@
 # Logica del Negocio
-## Usuarios 🐵
+## Usuario 🐵
   - id unico
   - correo unico
   - contraseña encriptada en hash
