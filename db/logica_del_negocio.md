@@ -13,11 +13,11 @@
 - Cada imagen tiene cero o mas usuarios que le han dado like
 - Cada imagen tiene cero o mas especies que aparecen en la
 - Cada imagen tiene cero o mas comentarios
-## especie 🌼
+## Especie 🌼
 - id
 - nombre
 - enlace a una web que de informacion de la especie opcional
-## bosque 🏕
+## Bosque 🏕
 - id
 - nombre
 - descripcion opcional (probablemente escrita por algun moderador)
