@@ -1,27 +1,30 @@
 # Logica del Negocio
-- Los Usuarios 🐵 deben tener:
+## Usuarios 🐵
   - id unico
   - correo unico
   - contraseña encriptada en hash
   - biografia opcional
   - fecha de nacimiento opcional
-- Cada imagen 🖼 debe tener:
-  - id
-  - fecha de publicacion
-  - link donde se alamacena la imagen (probablemente en el mismo server 😎)
-  - numero de likes
-  - numero de dislikes
-  - cero o mas comentarios
-  - cero o mas especies que aparecen en la imagen
+## Imagen 🖼
+- id
+- fecha de publicacion
+- link donde se almacena la imagen (probablemente en el mismo server 😎)
 - Cada imagen pertenece a un usuario
+- Cada imagen tiene cero o mas usuarios que le han dado like
+- Cada imagen tiene cero o mas especies que aparecen en la
 - Cada imagen tiene cero o mas comentarios
-- Cada especie 🌼 debe tener:
-  - id
-  - nombre
-  - enlace a una web que de informacion de la especie opcional
-- Cada bosque 🏕 debe tener:
-  - id
-  - nombre
-  - descripcion opcional (probablemente escrita por algun moderador)
+## especie 🌼
+- id
+- nombre
+- enlace a una web que de informacion de la especie opcional
+## bosque 🏕
+- id
+- nombre
+- descripcion opcional (probablemente escrita por algun moderador)
 - Cada bosque tiene cero o mas imagenes
 - Cada bosque tiene cero o mas especies
+- Cada bosque tiene cero o mas  comentarios
+## Comentario 📃
+- id
+- usuario
+- texto
