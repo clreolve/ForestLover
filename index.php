@@ -2,6 +2,9 @@
 
 include_once('./utilities.php');
 
+include_once('./templates/header.php');
+
+
 $arr = [];
 
 $arr["name"] = "proyecto";
@@ -10,3 +13,4 @@ $arr["hetero"] = true;
 
 debug($arr);
 
+include_once('./templates/footer.php');

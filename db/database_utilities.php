@@ -17,27 +17,7 @@ function run_query()
 
 }
 
-function add( $email, $password )
-{
-	global $mysqli;
-	$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email}', '{$password}')";
-	$mysqli->query($sql);
-
-}
-
-function update( $id, $email, $password )
-{
-	global $mysqli;
-	$sql = "UPDATE user SET email = '{$email}', password = '{$password}' WHERE id = {$id}";
-	$mysqli->query($sql);
-}
-
-function delete( $id )
-{
-	global $mysqli;
-	$sql = "DELETE FROM user WHERE id = {$id}";
-	$mysqli->query($sql);
-}
+// USER Functions
 
 function get_user_by_id( $id )
 {
@@ -48,4 +28,35 @@ function get_user_by_id( $id )
 		return $result->fetch_assoc();
 	}
 	return false;
+}
+
+function get_user_data_by_email( $email )
+{
+	global $mysqli;
+	$sql = "SELECT * FROM user_access WHERE email = '{$email}'";
+	$result = $mysqli->query($sql);
+	return $result->fetch_assoc();
+}
+
+
+function add_user( $email, $password )
+{
+	global $mysqli;
+	$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email}', '{$password}')";
+	$mysqli->query($sql);
+
+}
+
+function update_user( $id, $email, $password )
+{
+	global $mysqli;
+	$sql = "UPDATE user SET email = '{$email}', password = '{$password}' WHERE id = {$id}";
+	$mysqli->query($sql);
+}
+
+function delete_user( $id )
+{
+	global $mysqli;
+	$sql = "DELETE FROM user WHERE id = {$id}";
+	$mysqli->query($sql);
 }
