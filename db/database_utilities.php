@@ -42,7 +42,10 @@ function get_user_data_by_email( $email )
 function add_user( $email, $password )
 {
 	global $mysqli;
-	$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email}', '{$password}')";
+	$email_sanitized = filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS);
+	$password_sanitized = filter_var($password, FILTER_SANITIZE_SPECIAL_CHARS);
+
+	$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email_sanitized}', '{$password_sanitized}')";
 	$mysqli->query($sql);
 
 }
@@ -50,13 +53,19 @@ function add_user( $email, $password )
 function update_user( $id, $email, $password )
 {
 	global $mysqli;
-	$sql = "UPDATE user SET email = '{$email}', password = '{$password}' WHERE id = {$id}";
+	$email_sanitized = filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_sanitized = filter_var($id, FILTER_SANITIZE_SPECIAL_CHARS);
+	$password_sanitized = filter_var($password, FILTER_SANITIZE_SPECIAL_CHARS);
+
+	$sql = "UPDATE user SET email = '{$email_sanitized}', password = '{$password_sanitized}' WHERE id = {$id_sanitized}";
 	$mysqli->query($sql);
 }
 
 function delete_user( $id )
 {
 	global $mysqli;
-	$sql = "DELETE FROM user WHERE id = {$id}";
+
+	$id_sanitized = filter_var($id, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM user WHERE id = {$id_sanitized}";
 	$mysqli->query($sql);
 }
