@@ -1,8 +1,17 @@
 <?php
 include_once('./dir_paths.php');
 include_once('./utilities.php');
-include_once('./header.php');
+include_once('./db/database_utilities.php')
+?>
 
-debug(JQUERY_PATH);
+<!DOCTYPE html>
+<html lang="en">
+<?php include_once('./templates/header.php'); ?>
 
-include_once('./footer.php');
+<body>
+    
+</body>
+
+<?php include_once('./templates/footer.php'); ?>
+
+</html>

@@ -17,6 +17,7 @@
 - id
 - nombre
 - enlace a una web que de informacion de la especie opcional
+- Cada especie tiene cero o mas etiquetas
 ## Bosque 🏕
 - id
 - nombre
@@ -28,3 +29,7 @@
 - id
 - usuario
 - texto
+## Etiqueta Plantas 🎫
+- id
+- nombre
+- descripcion opcional

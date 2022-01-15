@@ -33,7 +33,7 @@ function get_user_by_id( $id )
 function get_user_data_by_email( $email )
 {
 	global $mysqli;
-	$sql = "SELECT * FROM user_access WHERE email = '{$email}'";
+	$sql = "SELECT * FROM user WHERE email = '{$email}'";
 	$result = $mysqli->query($sql);
 	return $result->fetch_assoc();
 }
@@ -44,8 +44,8 @@ function add_user( $email, $password )
 	global $mysqli;
 	$email_sanitized = filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS);
 	$password_sanitized = filter_var($password, FILTER_SANITIZE_SPECIAL_CHARS);
-
-	$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email_sanitized}', '{$password_sanitized}')";
+	$password_hash = password_hash($password_sanitized, PASSWORD_DEFAULT);
+	$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email_sanitized}', '{$password_hash}')";
 	$mysqli->query($sql);
 
 }
