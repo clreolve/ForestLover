@@ -93,6 +93,23 @@ function delete_user( $id )
 	$mysqli->query($sql);
 }
 
+function upload_images_home_page(){
+	global $mysqli;
+
+	$sql = "SELECT id_imagen FROM imagen ORDER BY id_imagen DESC";
+	$result = $mysqli->query($sql);
+	return $result->fetch_assoc();
+
+}
+
+function upload_image_popup($uid, $id_imagen){
+	global $mysqli;
+
+	$sql = 'SELECT user.email, user.id, imagen.link, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};'
+	$sql1= 'SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen};'
+	$sql2 = 'SELECT id_imagen_like FROM imagen_like WHERE id_imagen = {$id_imagen} AND id_usuario = {$uid};'
+
+}
 /*
 Especificación del tipo de caracteres para bind de variables
 Carácter	Descripción
