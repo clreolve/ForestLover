@@ -3,11 +3,11 @@ require_once('database_credentials.php');
 $mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE);
 $result = '';
 
-if( $mysqli->connect_errno )
-{
-	echo 'Error en la conexión';
-	exit;
+if ($mysqli->connect_errno) {
+    echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
+
+
 
 function run_query()
 {
@@ -38,16 +38,39 @@ function get_user_data_by_email( $email )
 	return $result->fetch_assoc();
 }
 
-
 function add_user( $email, $password )
 {
+	
 	global $mysqli;
 	$email_sanitized = filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS);
 	$password_sanitized = filter_var($password, FILTER_SANITIZE_SPECIAL_CHARS);
 	$password_hash = password_hash($password_sanitized, PASSWORD_DEFAULT);
-	$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email_sanitized}', '{$password_hash}')";
-	$mysqli->query($sql);
+	
+	try {
+		$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email_sanitized}', '{$password_hash}')";
+		$mysqli->query($sql);
+	} catch (Exception $e) {
+		$e->getMessage();
+	}
 
+	/*
+	//el monstruo
+	$sql = "INSERT INTO user(id, email, password) VALUES (null, '?', '?')";
+	if (!($sentencia = $mysqli->prepare($sql))) {
+		echo "Falló la preparación: (" . $mysqli->errno . ") " . $mysqli->error;
+	}
+	if (!$sentencia->bind_param("i", $id)) {
+		echo "Falló la vinculación de parámetros: (" . $sentencia->errno . ") " . $sentencia->error;
+	}
+	if (!$sentencia->bind_param("ss", $email_sanitized,$password_sanitized)) {
+		echo "Falló la vinculación de parámetros: (" . $sentencia->errno . ") " . $sentencia->error;
+	}
+	if (!$sentencia->execute()) {
+		echo "Falló la ejecución: (" . $sentencia->errno . ") " . $sentencia->error;
+	}
+	//$result = $sentencia->get_result();
+	$sentencia->close();
+	*/
 }
 
 function update_user( $id, $email, $password )
@@ -69,3 +92,12 @@ function delete_user( $id )
 	$sql = "DELETE FROM user WHERE id = {$id_sanitized}";
 	$mysqli->query($sql);
 }
+
+/*
+Especificación del tipo de caracteres para bind de variables
+Carácter	Descripción
+i	la variable correspondiente es de tipo entero
+d	la variable correspondiente es de tipo double
+s	la variable correspondiente es de tipo string
+b	la variable correspondiente es un blob y se envía en paquetes
+*/
