@@ -111,6 +111,17 @@ function upload_image_popup($uid, $id_imagen){
 
 }
 
+/**(uid, id_imagen) => [
+  fecha de publicacion, 
+  descripcion,
+  numero me gustas (count), 
+  me gusta(bool),
+  id usuario al que pertenece,
+  nombre usuario al que pertenece
+]
+ */
+function get_image_popup($uid, $id_imagen){
+	global $mysqli;
 
 	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
 	$sql_likes = "SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen};";
@@ -128,7 +139,25 @@ function upload_image_popup($uid, $id_imagen){
 	return $return;
 
 }
+function get_image_popup_not_login($uid, $id_imagen){
+	global $mysqli;
 
+	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
+	$sql_likes = "SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen};";
+	
+
+	$result_imagen = $mysqli->query($sql_imagen);
+	$result_likes = $mysqli->query($sql_likes);
+	
+
+	$return = [];
+	$return["imagen"] = $result_imagen->fetch_assoc();
+	$return["numero_likes"] = $result_likes->fetch_assoc();
+	
+
+	return $return;
+
+}
 
 /*
 Especificación del tipo de caracteres para bind de variables
