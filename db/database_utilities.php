@@ -93,36 +93,24 @@ function delete_user( $id )
 	$mysqli->query($sql);
 }
 
-/**
- * Vivanco Mora
- * () -> lista[id_imagen descendeteporfecha];
- */
-function get_images_home_page(){
+function upload_images_home_page(){
 	global $mysqli;
 
 	$sql = "SELECT id_imagen FROM imagen ORDER BY id_imagen DESC";
 	$result = $mysqli->query($sql);
-
-	$imagenes = [];
-	while($e = $result->fetch_assoc()){
-        array_push($imagenes["imagenes"],$e);
-	}
-
-	return $imagenes;
+	return $result->fetch_assoc();
 
 }
 
-/**(uid, id_imagen) => [
-  fecha de publicacion, 
-  descripcion,
-  numero me gustas (count), 
-  me gusta(bool),
-  id usuario al que pertenece,
-  nombre usuario al que pertenece
-]
- */
-function get_image_popup($uid, $id_imagen){
+function upload_image_popup($uid, $id_imagen){
 	global $mysqli;
+
+	$sql = 'SELECT user.email, user.id, imagen.link, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen}'
+	$sql1= 'SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen}';
+	$sql2 = 'SELECT id_imagen_like FROM imagen_like WHERE id_imagen = {$id_imagen} AND id_usuario = {$uid}';
+
+}
+
 
 	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
 	$sql_likes = "SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen};";
