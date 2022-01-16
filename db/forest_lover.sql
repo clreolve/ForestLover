@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2022 at 12:07 AM
+-- Generation Time: Jan 17, 2022 at 12:50 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -31,18 +31,6 @@ CREATE TABLE `bosque` (
   `id_bosque` int(11) NOT NULL,
   `nombre` text NOT NULL,
   `descripción` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bosque_comentario`
---
-
-CREATE TABLE `bosque_comentario` (
-  `id_bosque_comentario` int(11) NOT NULL,
-  `id_bosque` int(11) NOT NULL,
-  `id_comentario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -226,14 +214,6 @@ ALTER TABLE `bosque`
   ADD PRIMARY KEY (`id_bosque`);
 
 --
--- Indexes for table `bosque_comentario`
---
-ALTER TABLE `bosque_comentario`
-  ADD PRIMARY KEY (`id_bosque_comentario`),
-  ADD KEY `id_bosque` (`id_bosque`),
-  ADD KEY `id_comentario` (`id_comentario`);
-
---
 -- Indexes for table `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
@@ -341,12 +321,6 @@ ALTER TABLE `bosque`
   MODIFY `id_bosque` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bosque_comentario`
---
-ALTER TABLE `bosque_comentario`
-  MODIFY `id_bosque_comentario` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
@@ -427,13 +401,6 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `bosque_comentario`
---
-ALTER TABLE `bosque_comentario`
-  ADD CONSTRAINT `bosque_comentario_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
-  ADD CONSTRAINT `bosque_comentario_ibfk_2` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id_comentario`);
 
 --
 -- Constraints for table `bosque_especie`
