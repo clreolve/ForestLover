@@ -6,3 +6,15 @@ function debug($var) {
 	var_dump($var);
 	echo "</pre>";
 }
+
+function islogin(){
+	if(isset($_SESSION["uid"])){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function get_uid(){
+	return isset($_SESSION["uid"]) ? $_SESSION["uid"] : "";
+}

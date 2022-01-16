@@ -43,8 +43,7 @@ uid => usuario logeado
 
 (uid, id_imagen) => [
   fecha de publicacion, 
-  descripcion, 
-  link,
+  descripcion,
   numero me gustas (count), 
   me gusta(bool),
   id usuario al que pertenece,
@@ -53,8 +52,7 @@ uid => usuario logeado
 
 (id_imagen) => [
   fecha de publicacion, 
-  descripcion, 
-  link,
+  descripcion,
   numero me gustas (count),
   id usuario al que pertenece,
   nombre usuario al que pertenece
@@ -118,7 +116,7 @@ uid => usuario logeado
 ]
 
 ## check
-add_imagen(nombre,fecha_publicacion,link)
+*add_imagen(nombre,file)*
 borrar_imagen(id)
 
 add_etiqueta(nombre)
