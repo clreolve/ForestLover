@@ -25,4 +25,33 @@
 (6)
     SELECT especie.id_especie , especie.nombre FROM especie INNER JOIN imagen_especie ON especie.id_especie = imagen_especie.id_especie WHERE imagen_especie.id_imagen = 3;
 
+## Bosque
 
+(1)
+    SELECT nombre, descripción FROM bosque WHERE id_bosque = {$id_bosque};
+
+    SELECT COUNT(id_bosque_like) FROM bosque_like WHERE id_bosque = {$id_bosque};
+
+    SELECT id_bosque_like FROM bosque_like WHERE id_bosque = {$} AND id_usuario = {$uid};
+
+(2) 
+    SELECT nombre, descripción FROM bosque WHERE id_bosque = {$id_bosque};
+
+    SELECT COUNT(id_bosque_like) FROM bosque_like WHERE id_bosque = {$id_bosque};
+
+(3)
+    
+    SELECT bosque_especie.id_especie, especie.nombre FROM bosque_especie INNER JOIN especie ON bosque_especie.id_especie = especie.id_especie WHERE bosque_especie.id_bosque= {$id_bosque};
+
+(4)
+    SELECT bosque_etiqueta.id_bosque_etiqueta, etiqueta.nombre FROM bosque_etiqueta INNER JOIN etiqueta ON bosque_etiqueta.id_etiqueta = etiqueta.id_etiqueta WHERE bosque_etiqueta.id_bosque = {$id_bosque};
+
+ (5)
+    SELECT id_imagen FROM bosque_imagen WHERE id_bosque = {$id_bosque} ORDER BY id_imagen DESC;   
+
+
+## adicionales
+(1)
+    SELECT id_imagen FROM etiqueta_imagen WHERE id_etiqueta = {$id_etiqueta} GROUP BY id_imagen DESC;
+
+(2) 

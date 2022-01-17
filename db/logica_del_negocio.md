@@ -39,26 +39,28 @@
 # SQL
 uid => usuario logeado
 ## home_page
-() -> lista[id_imagen descendeteporfecha];
+1) () -> lista[id_imagen descendeteporfecha]; ya esta uwuw
 
-(uid, id_imagen) => [
+2) (uid, id_imagen) => [
   fecha de publicacion, 
-  descripcion,
+  descripcion, 
+  link,
   numero me gustas (count), 
   me gusta(bool),
   id usuario al que pertenece,
   nombre usuario al que pertenece
 ]
 
-(id_imagen) => [
+3) (id_imagen) => [  (no logeado)
   fecha de publicacion, 
-  descripcion,
+  descripcion, 
+  link,
   numero me gustas (count),
   id usuario al que pertenece,
   nombre usuario al que pertenece
 ]
 
-(id_imagen) -> lista comentarios para el id_imagen[
+4)(id_imagen) -> lista comentarios para el id_imagen[
   id_comentario,
   texto_comentario,
   id_user_comentario,
@@ -67,47 +69,47 @@ uid => usuario logeado
   id_nombre
 ]
 
-(id_imagen) -> lista etiquetas con ese id_imagen[
+5)(id_imagen) -> lista etiquetas con ese id_imagen[  listo uwu
   id_etiqueta,
   nombre_etiqueta
 ]
 
-(id_especie) -> lista especies con ese id_imagen[
+6)id_especie) -> lista especies con ese id_imagen[ listo uwu
   id_especie,
   nombre_especie
 ]
 
 ## pagina bosque
-(uid,id_bosque) -> bosque [
+1)(uid,id_bosque) -> bosque [           ya uwu
   nombre,
   descripcion,
   numero de personas al que les gusta ese bosque,
   me gusta(boolean),
 ]
 
-(id_bosque) -> bosque [
+2)(id_bosque) -> bosque [
   nombre,
-  descripcion,
+  descripcion,                                   ya uwu
   numero de personas al que les gusta ese bosque,
 ]
 
-(id_bosque) -> lista especies [
+3)(id_bosque) -> lista especies [           
   id_especie,
   nombre especie
 ]
 
-(id_bosque) -> lista etiquetas bosque [
+4)(id_bosque) -> lista etiquetas bosque [
   id_etiqueta,
-  nombre especie
+  nombre etiqueta 
 ]
 
-(id_bosque) -> lista imagenes descendente fecha [
+5)(id_bosque) -> lista imagenes descendente fecha [   ya uwu
   id_imagen
 ]
 
 ## adicionales
 
-(id_etiqueta) -> lista imagenes descendente fecha [
+(1) (id_etiqueta) -> lista imagenes descendente fecha [
   id_imagen
 ]
 
@@ -116,7 +118,7 @@ uid => usuario logeado
 ]
 
 ## check
-*add_imagen(nombre,file)*
+add_imagen(nombre,fecha_publicacion,link)
 borrar_imagen(id)
 
 add_etiqueta(nombre)
