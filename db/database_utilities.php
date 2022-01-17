@@ -90,6 +90,7 @@ function delete_user( $id )
 	$mysqli->query($sql);
 }
 
+## Home
 /**
  * () -> lista[id_imagen descendeteporfecha];
  */
@@ -154,6 +155,169 @@ function get_image_not_login($id_imagen){
 	$return["imagen"] = $result_imagen->fetch_assoc();
 	$return["numero_likes"] = $result_likes->fetch_assoc();
 	
+
+	return $return;
+
+}
+
+function image_comments($id_imagen){
+	global $mysqli;
+
+	$sql = "SELECT comentario.id_comentario, comentario.texto, comentario.id_usuario, user.email FROM comentario INNER JOIN user ON comentario.id_usuario = user.id WHERE comentario.id_imagen = {$id_imagen}";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
+}
+
+function image_tags($id_imagen){
+	global $mysqli;
+
+	$sql = "SELECT etiqueta_imagen.id_etiqueta, etiqueta.nombre FROM etiqueta_imagen INNER JOIN etiqueta ON etiqueta_imagen.id_etiqueta = etiqueta.id_etiqueta WHERE etiqueta_imagen.id_imagen = {$id_imagen}";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
+}
+
+function image_tags($id_especie){
+	global $mysqli;
+
+	$sql = " SELECT especie.id_especie , especie.nombre FROM especie INNER JOIN imagen_especie ON especie.id_especie = imagen_especie.id_especie WHERE imagen_especie.id_imagen = {$id_imagen}";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
+}
+
+## pagina bosque
+
+function get_forest_login($id_bosque, $uid){
+	global $mysqli;
+
+	$sql_bosque = "SELECT nombre, descripción FROM bosque WHERE id_bosque = {$id_bosque};";
+	$sql_likes = "SELECT COUNT(id_bosque_like) FROM bosque_like WHERE id_bosque = {$id_bosque};";
+	$sql_me_gusta = "SELECT id_bosque_like FROM bosque_like WHERE id_bosque = {$id_bosque} AND id_usuario = {$uid};";
+
+	$result_bosque = $mysqli->query($sql_imagen);
+	$result_likes = $mysqli->query($sql_likes);
+	$result_me_gusta = $mysqli->query($sql_me_gusta);
+
+	$return = [];
+	$return["bosque"] = $result_bosque->fetch_assoc();
+	$return["numero_likes"] = $result_likes->fetch_assoc();
+
+	$mylike =  $result_me_gusta->fetch_assoc();
+	$return["me_gusta"] = $mylike == NULL ? false : true;
+
+	return $return;
+}
+
+function get_forest_not_login($id_bosque){
+	global $mysqli;
+
+	$sql_bosque = "SELECT nombre, descripción FROM bosque WHERE id_bosque = {$id_bosque};";
+	$sql_likes = "SELECT COUNT(id_bosque_like) FROM bosque_like WHERE id_bosque = {$id_bosque};";
+	
+
+	$result_bosque = $mysqli->query($sql_imagen);
+	$result_likes = $mysqli->query($sql_likes);
+	
+
+	$return = [];
+	$return["bosque"] = $result_bosque->fetch_assoc();
+	$return["numero_likes"] = $result_likes->fetch_assoc();
+	
+
+	return $return;
+}
+
+function forest_species(id_bosque) {
+	global $mysqli;
+
+	$sql = "SELECT bosque_especie.id_especie, especie.nombre FROM bosque_especie INNER JOIN especie ON bosque_especie.id_especie = especie.id_especie WHERE bosque_especie.id_bosque= {$id_bosque};";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
+}
+
+function forest_tags(id_bosque){
+
+	global $mysqli;
+
+	$sql = "SELECT bosque_etiqueta.id_bosque_etiqueta, etiqueta.nombre FROM bosque_etiqueta INNER JOIN etiqueta ON bosque_etiqueta.id_etiqueta = etiqueta.id_etiqueta WHERE bosque_etiqueta.id_bosque = {$id_bosque};";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
+
+
+
+}
+
+function get_forest_image(id_bosque){
+
+	global $mysqli;
+
+	$sql = "SELECT id_imagen FROM bosque_imagen WHERE id_bosque = {$id_bosque} ORDER BY id_imagen DESC;";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
+}
+
+## adicionales
+
+function get_image_tags(id_etiqueta){
+
+	global $mysqli;
+
+	$sql = "SELECT id_imagen FROM etiqueta_imagen WHERE id_etiqueta = {$id_etiqueta} GROUP BY id_imagen DESC;";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
+}
+function get_image_species(id_species){
+
+	global $mysqli;
+
+	$sql = "SELECT id_imagen FROM imagen_especie WHERE id_especie = {$id_especie} ORDER BY id_imagen DESC;";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
 
 	return $return;
 

@@ -126,18 +126,18 @@ add_imagen(nombre,fecha_publicacion) ya no
 3)borrar_etiqueta(id_etiqueta)
 
 4)add_etiqueta_bosque(id_etiqueta, id_bosque)
-add_etiqueta_imagen(id_etiqueta, id_imagen)
-add_etiqueta_especie(id_etiqueta, id_especie)
-borrar_etiqueta_bosque(id_etiqueta, id_bosque)
-borrar_etiqueta_imagen(id_etiqueta, id_imagen)
-borrar_etiqueta_especie(id_etiqueta, id_especie)
+5)add_etiqueta_imagen(id_etiqueta, id_imagen)
+6)add_etiqueta_especie(id_etiqueta, id_especie)
+7)borrar_etiqueta_bosque(id_etiqueta, id_bosque)
+8)borrar_etiqueta_imagen(id_etiqueta, id_imagen)
+9)borrar_etiqueta_especie(id_etiqueta, id_especie)
 
-add_comentario_imagen(id_user,id_imagen,texto)
-add_comentario_bosque(id_user,id_bosque,texto)
+10)add_comentario_imagen(id_user,id_imagen,texto)
+)add_comentario_bosque(id_user,id_bosque,texto)  NO
 
-borrar_comentario(id_comentario)
+11)borrar_comentario(id_comentario)
 
-add_like_imagen(id_imagen,ide_usuario)
-add_like_bosque(id_bosque,ide_usuario)
-borrar_like_imagen(id_imagen,uid)
-borrar_like_bosque(id_bosque,uid)
+12)add_like_imagen(id_imagen,ide_usuario)
+13)add_like_bosque(id_bosque,ide_usuario)
+14)borrar_like_imagen(id_imagen,uid)
+15)borrar_like_bosque(id_bosque,uid)
