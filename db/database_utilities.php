@@ -188,10 +188,10 @@ function image_tags($id_imagen){
 	return $return;
 }
 
-function image_tags($id_especie){
+function species_tags($id_especie){
 	global $mysqli;
 
-	$sql = " SELECT especie.id_especie , especie.nombre FROM especie INNER JOIN imagen_especie ON especie.id_especie = imagen_especie.id_especie WHERE imagen_especie.id_imagen = {$id_imagen}";
+	$sql = " SELECT especie.id_especie , especie.nombre FROM especie INNER JOIN imagen_especie ON especie.id_especie = imagen_especie.id_especie WHERE imagen_especie.id_imagen = {$id_especie}";
 	$result = $mysqli->query($sql);
 
 	$return = [];
@@ -211,7 +211,7 @@ function get_forest_login($id_bosque, $uid){
 	$sql_likes = "SELECT COUNT(id_bosque_like) FROM bosque_like WHERE id_bosque = {$id_bosque};";
 	$sql_me_gusta = "SELECT id_bosque_like FROM bosque_like WHERE id_bosque = {$id_bosque} AND id_usuario = {$uid};";
 
-	$result_bosque = $mysqli->query($sql_imagen);
+	$result_bosque = $mysqli->query($sql_bosque);
 	$result_likes = $mysqli->query($sql_likes);
 	$result_me_gusta = $mysqli->query($sql_me_gusta);
 
@@ -231,20 +231,17 @@ function get_forest_not_login($id_bosque){
 	$sql_bosque = "SELECT nombre, descripción FROM bosque WHERE id_bosque = {$id_bosque};";
 	$sql_likes = "SELECT COUNT(id_bosque_like) FROM bosque_like WHERE id_bosque = {$id_bosque};";
 	
-
-	$result_bosque = $mysqli->query($sql_imagen);
+	$result_bosque = $mysqli->query($sql_bosque);
 	$result_likes = $mysqli->query($sql_likes);
 	
-
 	$return = [];
 	$return["bosque"] = $result_bosque->fetch_assoc();
 	$return["numero_likes"] = $result_likes->fetch_assoc();
 	
-
 	return $return;
 }
 
-function forest_species(id_bosque) {
+function forest_species($id_bosque) {
 	global $mysqli;
 
 	$sql = "SELECT bosque_especie.id_especie, especie.nombre FROM bosque_especie INNER JOIN especie ON bosque_especie.id_especie = especie.id_especie WHERE bosque_especie.id_bosque= {$id_bosque};";
@@ -258,7 +255,7 @@ function forest_species(id_bosque) {
 	return $return;
 }
 
-function forest_tags(id_bosque){
+function forest_tags($id_bosque){
 
 	global $mysqli;
 
@@ -276,7 +273,7 @@ function forest_tags(id_bosque){
 
 }
 
-function get_forest_image(id_bosque){
+function get_forest_image($id_bosque){
 
 	global $mysqli;
 
@@ -293,7 +290,7 @@ function get_forest_image(id_bosque){
 
 ## adicionales
 
-function get_image_tags(id_etiqueta){
+function get_image_tags($id_etiqueta){
 
 	global $mysqli;
 
@@ -307,7 +304,7 @@ function get_image_tags(id_etiqueta){
 
 	return $return;
 }
-function get_image_species(id_species){
+function get_image_species($id_especie){
 
 	global $mysqli;
 
@@ -322,6 +319,140 @@ function get_image_species(id_species){
 	return $return;
 
 }
+
+//Claudio Olvera
+
+function delete_image($id_bosque){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM imagen WHERE id_bosque = {$id_bosque};";
+	$mysqli->query($sql);
+}
+
+function create_tag($nombre){
+	global $mysqli;
+
+	$nombre = filter_var($nombre, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO etiqueta(nombre) VALUES ({$nombre});";
+	$mysqli->query($sql);
+}
+
+function delete_tag($id_usuario){
+	global $mysqli;
+
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM etiqueta WHERE id_usuario = {$id_usuario};";
+	$mysqli->query($sql);
+}
+
+function give_tag_forest($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO bosque_etiqueta(id_bosque, id_usuario) VALUES ({$id_bosque},{$id_usuario});";
+	$mysqli->query($sql);
+}
+
+function give_tag_image($id_bosque,$id_usuarios){
+	global $mysqli;
+
+	$id_usuarios = filter_var($id_usuarios, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO etiqueta_imagen (id_usuario, id_bosque) VALUES ({$id_usuarios},{$id_bosque});";
+	$mysqli->query($sql);
+}
+
+function give_tag_spice($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO etiqueta_especie (id_usuario, id_bosque) VALUES ({$id_usuario},{$id_bosque});";
+	$mysqli->query($sql);
+}
+
+function delete_tag_forest($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM bosque_etiqueta WHERE id_bosque = {$id_bosque} AND id_usuario{$id_usuario};";
+	$mysqli->query($sql);
+}
+
+function delete_tag_image($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM etiqueta_imagen WHERE id_usuario = {$id_usuario} AND id_bosque{$id_bosque};";
+	$mysqli->query($sql);
+}
+
+function delete_tag_species($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM etiqueta_especie WHERE id_usuario = {$id_usuario} AND id_bosque{$id_bosque};";
+	$mysqli->query($sql);
+}
+
+function add_comentario($id_usuario,$texto,$id_bosque){
+	global $mysqli;
+
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$texto = filter_var($texto, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO comentario (id_usuario, texto, id_bosque) VALUES ({$id_usuario}, '{$texto}', {$id_bosque});";
+	$mysqli->query($sql);
+}
+
+function delete_comentario($id_comentario){
+	global $mysqli;
+	$id_comentario = filter_var($id_comentario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM comentario WHERE id_comentario = {$id_comentario};";
+	$mysqli->query($sql);
+}
+
+function like_image($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO imagen_like(id_bosque, id_usuario) VALUES ({$id_bosque},{$id_usuario});";
+	$mysqli->query($sql);
+}
+
+function like_forest($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO bosque_like(id_usuario, id_bosque) VALUES({$id_usuario},{$id_bosque});";
+	$mysqli->query($sql);
+}
+
+function remove_like_image($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM imagen_like WHERE id_usario = {$id_usuario} AND id_bosque = {$id_bosque};";
+	$mysqli->query($sql);
+}
+
+function remove_like_forest($id_bosque,$id_usuario){
+	global $mysqli;
+
+	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM bosque_like WHERE id_usario = {$id_usuario} AND id_bosque = {$id_bosque};";
+	$mysqli->query($sql);
+}
+
 
 /*
 Especificación del tipo de caracteres para bind de variables
