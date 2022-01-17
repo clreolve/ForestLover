@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
         $file = addslashes(file_get_contents($image));
 
         debug($_FILES['file']["type"]);
-        
+
         $uid = $_SESSION["uid"];
         $descripcion = $_POST["descripcion"];
 
@@ -28,7 +28,7 @@ if (isset($_POST["submit"])) {
 
 
         $sql = "INSERT INTO imagen(id_imagen, fecha_publicacion, file, id_usuario, descripcion) 
-            VALUES (NULL, current_timestamp(),'{$file}',{$uid},'{$descripcion}')";
+            VALUES (NULL, current_timestamp(),'{$file}',{$uid},'{$descripcion}');";
 
         $insertar = $mysqli->query($sql);        
         

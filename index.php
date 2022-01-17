@@ -9,6 +9,18 @@ include_once('./db/database_utilities.php')
 <?php include_once('./templates/header.php'); ?>
 
 <body>
+
+    <table>
+        <tr>
+            <td>id</td>
+            <td>descripcion</td>
+            <td>imagen</td>
+        </tr>
+        <?php 
+        $r = get_last_images();
+        debug($r);
+        ?>
+    </table>
     
 </body>
 
