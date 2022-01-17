@@ -8,7 +8,7 @@ include_once('utilities.php');
 <?php include_once("./templates/header.php") ?>
 
 <body>
-    <p> Hola <?php echo isset($_SESSION["uid"]) ? $_SESSION["uid"] : "Desconocido"; ?> </p>
+    <p> Hola usuario con indice <?php echo isset($_SESSION["uid"]) ? $_SESSION["uid"] : "Desconocido"; ?> </p>
 
     <?php if (isset($_SESSION["uid"])) { ?>
 
