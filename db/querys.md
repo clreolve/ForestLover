@@ -72,3 +72,41 @@
 (4)
     INSERT INTO bosque_etiqueta(id_bosque, id_etiqueta) VALUES
 ({$id_bosque},{$id_etiqueta});
+
+(5)
+    INSERT INTO etiqueta_imagen (id_etiqueta, id_imagen) VALUES
+({$id_etiquetas},{$id_imagen});
+
+(6)
+    INSERT INTO etiqueta_especie (id_etiqueta, id_especie) VALUES
+({$id_etiqueta},{$id_especie});
+
+(7)
+    DELETE FROM bosque_etiqueta WHERE id_bosque = {$id_bosque} AND id_etiqueta{$id_etiqueta};
+
+(8)
+    DELETE FROM etiqueta_imagen WHERE id_etiqueta = {$id_etiqueta} AND id_imagen{$id_imagen};
+
+(9)
+    DELETE FROM etiqueta_especie WHERE id_etiqueta = {$id_etiqueta} AND id_especie{$id_especie};
+
+(10)
+    INSERT INTO comentario (id_usuario, texto, id_imagen) VALUES
+({$id_usuario},{$id_txt}, ${id_texto}, {$id_imagen});
+
+(11)
+    DELETE FROM comentario WHERE id_comentario = {$id_comentario};
+
+(12)
+    INSERT INTO imagen_like(id_imagen, id_usuario) VALUES
+({$id_imagen},{$id_usuario});
+
+(13)
+    INSERT INTO bosque_like(id_usuario, id_bosque) VALUES
+({$id_usuario,{$id_bosque});
+
+(14)
+    DELETE FROM imagen_like WHERE id_usario = {$uid} AND id_imagen = {$id_imagen};
+
+(15)
+     DELETE FROM bosque_like WHERE id_usario = {$uid} AND id_bosque = {$id_bosque};
