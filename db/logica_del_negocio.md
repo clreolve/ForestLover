@@ -113,18 +113,19 @@ uid => usuario logeado
   id_imagen
 ]
 
-(id_especies) -> lista imagenes descendente fecha [
+2) (id_especies) -> lista imagenes descendente fecha [
   id_imagen
 ]
 
 ## check
-add_imagen(nombre,fecha_publicacion,link)
-borrar_imagen(id)
+add_imagen(nombre,fecha_publicacion) ya no
 
-add_etiqueta(nombre)
-borrar_etiqueta(id_etiqueta)
+1)borrar_imagen(id)
 
-add_etiqueta_bosque(id_etiqueta, id_bosque)
+2)add_etiqueta(nombre)
+3)borrar_etiqueta(id_etiqueta)
+
+4)add_etiqueta_bosque(id_etiqueta, id_bosque)
 add_etiqueta_imagen(id_etiqueta, id_imagen)
 add_etiqueta_especie(id_etiqueta, id_especie)
 borrar_etiqueta_bosque(id_etiqueta, id_bosque)
