@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 17, 2022 at 12:50 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 17-01-2022 a las 03:51:09
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `forest_lover`
+-- Base de datos: `forest_lover`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bosque`
+-- Estructura de tabla para la tabla `bosque`
 --
 
 CREATE TABLE `bosque` (
@@ -36,7 +36,7 @@ CREATE TABLE `bosque` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bosque_especie`
+-- Estructura de tabla para la tabla `bosque_especie`
 --
 
 CREATE TABLE `bosque_especie` (
@@ -48,7 +48,7 @@ CREATE TABLE `bosque_especie` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bosque_etiqueta`
+-- Estructura de tabla para la tabla `bosque_etiqueta`
 --
 
 CREATE TABLE `bosque_etiqueta` (
@@ -60,7 +60,7 @@ CREATE TABLE `bosque_etiqueta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bosque_imagen`
+-- Estructura de tabla para la tabla `bosque_imagen`
 --
 
 CREATE TABLE `bosque_imagen` (
@@ -72,7 +72,7 @@ CREATE TABLE `bosque_imagen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bosque_like`
+-- Estructura de tabla para la tabla `bosque_like`
 --
 
 CREATE TABLE `bosque_like` (
@@ -84,7 +84,7 @@ CREATE TABLE `bosque_like` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comentario`
+-- Estructura de tabla para la tabla `comentario`
 --
 
 CREATE TABLE `comentario` (
@@ -98,7 +98,7 @@ CREATE TABLE `comentario` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `especie`
+-- Estructura de tabla para la tabla `especie`
 --
 
 CREATE TABLE `especie` (
@@ -110,7 +110,7 @@ CREATE TABLE `especie` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etiqueta`
+-- Estructura de tabla para la tabla `etiqueta`
 --
 
 CREATE TABLE `etiqueta` (
@@ -121,7 +121,7 @@ CREATE TABLE `etiqueta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etiqueta_especie`
+-- Estructura de tabla para la tabla `etiqueta_especie`
 --
 
 CREATE TABLE `etiqueta_especie` (
@@ -133,7 +133,7 @@ CREATE TABLE `etiqueta_especie` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etiqueta_imagen`
+-- Estructura de tabla para la tabla `etiqueta_imagen`
 --
 
 CREATE TABLE `etiqueta_imagen` (
@@ -145,7 +145,7 @@ CREATE TABLE `etiqueta_imagen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `imagen`
+-- Estructura de tabla para la tabla `imagen`
 --
 
 CREATE TABLE `imagen` (
@@ -159,7 +159,7 @@ CREATE TABLE `imagen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `imagen_especie`
+-- Estructura de tabla para la tabla `imagen_especie`
 --
 
 CREATE TABLE `imagen_especie` (
@@ -171,7 +171,7 @@ CREATE TABLE `imagen_especie` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `imagen_like`
+-- Estructura de tabla para la tabla `imagen_like`
 --
 
 CREATE TABLE `imagen_like` (
@@ -183,7 +183,7 @@ CREATE TABLE `imagen_like` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Estructura de tabla para la tabla `user`
 --
 
 CREATE TABLE `user` (
@@ -194,27 +194,27 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Volcado de datos para la tabla `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `fecha_inscripcion`) VALUES
 (3, 'php', '$2y$10$I3DtTw2YCboxclIrNwGxeOpMn.oLfcLh.ajq8jwZ9iKvkFtVFCGmS', '2022-01-16 15:41:00'),
 (4, 'admin', '$2y$10$cxPhDYJOiTpOoWV97HYPzO6C3u10wIEPUypQ7IGVJKFbHpJfkiOU2', '2022-01-16 15:41:00'),
-(5, 'jose', '$2y$10$biMaeru3zhlF6fMWGYS7Yud9NZLlXtFBpQHOcai/of97/vjZ4rQEq', '2022-01-16 15:41:00'),
+(5, 'monaka', 'monaka', '2022-01-16 15:41:00'),
 (6, 'uwu', '$2y$10$vMzLKQYE4wrlcpvL9L/v3OGUET.4Rtflnaym7IucR78AsFPPXpDrW', '2022-01-16 15:41:00');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `bosque`
+-- Indices de la tabla `bosque`
 --
 ALTER TABLE `bosque`
   ADD PRIMARY KEY (`id_bosque`);
 
 --
--- Indexes for table `bosque_especie`
+-- Indices de la tabla `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
   ADD PRIMARY KEY (`id_bosque_especie`),
@@ -222,7 +222,7 @@ ALTER TABLE `bosque_especie`
   ADD KEY `id_especie` (`id_especie`);
 
 --
--- Indexes for table `bosque_etiqueta`
+-- Indices de la tabla `bosque_etiqueta`
 --
 ALTER TABLE `bosque_etiqueta`
   ADD PRIMARY KEY (`id_bosque_etiqueta`),
@@ -230,7 +230,7 @@ ALTER TABLE `bosque_etiqueta`
   ADD KEY `id_etiqueta` (`id_etiqueta`);
 
 --
--- Indexes for table `bosque_imagen`
+-- Indices de la tabla `bosque_imagen`
 --
 ALTER TABLE `bosque_imagen`
   ADD PRIMARY KEY (`id_bosque_imagen`),
@@ -238,7 +238,7 @@ ALTER TABLE `bosque_imagen`
   ADD KEY `id_imagen` (`id_imagen`);
 
 --
--- Indexes for table `bosque_like`
+-- Indices de la tabla `bosque_like`
 --
 ALTER TABLE `bosque_like`
   ADD PRIMARY KEY (`id_bosque_like`),
@@ -246,7 +246,7 @@ ALTER TABLE `bosque_like`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `comentario`
+-- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_comentario`),
@@ -254,19 +254,19 @@ ALTER TABLE `comentario`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `especie`
+-- Indices de la tabla `especie`
 --
 ALTER TABLE `especie`
   ADD PRIMARY KEY (`id_especie`);
 
 --
--- Indexes for table `etiqueta`
+-- Indices de la tabla `etiqueta`
 --
 ALTER TABLE `etiqueta`
   ADD PRIMARY KEY (`id_etiqueta`);
 
 --
--- Indexes for table `etiqueta_especie`
+-- Indices de la tabla `etiqueta_especie`
 --
 ALTER TABLE `etiqueta_especie`
   ADD PRIMARY KEY (`id_etiqueta_especie`),
@@ -274,7 +274,7 @@ ALTER TABLE `etiqueta_especie`
   ADD KEY `id_etiqueta` (`id_etiqueta`);
 
 --
--- Indexes for table `etiqueta_imagen`
+-- Indices de la tabla `etiqueta_imagen`
 --
 ALTER TABLE `etiqueta_imagen`
   ADD PRIMARY KEY (`id_etiqueta_imagen`),
@@ -282,14 +282,14 @@ ALTER TABLE `etiqueta_imagen`
   ADD KEY `id_imagen` (`id_imagen`);
 
 --
--- Indexes for table `imagen`
+-- Indices de la tabla `imagen`
 --
 ALTER TABLE `imagen`
   ADD PRIMARY KEY (`id_imagen`),
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `imagen_especie`
+-- Indices de la tabla `imagen_especie`
 --
 ALTER TABLE `imagen_especie`
   ADD PRIMARY KEY (`id_imagen_especie`),
@@ -297,7 +297,7 @@ ALTER TABLE `imagen_especie`
   ADD KEY `id_imagen` (`id_imagen`);
 
 --
--- Indexes for table `imagen_like`
+-- Indices de la tabla `imagen_like`
 --
 ALTER TABLE `imagen_like`
   ADD PRIMARY KEY (`id_imagen_like`),
@@ -305,171 +305,171 @@ ALTER TABLE `imagen_like`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `user`
+-- Indices de la tabla `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `bosque`
+-- AUTO_INCREMENT de la tabla `bosque`
 --
 ALTER TABLE `bosque`
   MODIFY `id_bosque` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bosque_especie`
+-- AUTO_INCREMENT de la tabla `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
   MODIFY `id_bosque_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bosque_etiqueta`
+-- AUTO_INCREMENT de la tabla `bosque_etiqueta`
 --
 ALTER TABLE `bosque_etiqueta`
   MODIFY `id_bosque_etiqueta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bosque_imagen`
+-- AUTO_INCREMENT de la tabla `bosque_imagen`
 --
 ALTER TABLE `bosque_imagen`
   MODIFY `id_bosque_imagen` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `bosque_like`
+-- AUTO_INCREMENT de la tabla `bosque_like`
 --
 ALTER TABLE `bosque_like`
   MODIFY `id_bosque_like` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `comentario`
+-- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `especie`
+-- AUTO_INCREMENT de la tabla `especie`
 --
 ALTER TABLE `especie`
   MODIFY `id_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `etiqueta`
+-- AUTO_INCREMENT de la tabla `etiqueta`
 --
 ALTER TABLE `etiqueta`
-  MODIFY `id_etiqueta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_etiqueta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `etiqueta_especie`
+-- AUTO_INCREMENT de la tabla `etiqueta_especie`
 --
 ALTER TABLE `etiqueta_especie`
   MODIFY `id_etiqueta_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `etiqueta_imagen`
+-- AUTO_INCREMENT de la tabla `etiqueta_imagen`
 --
 ALTER TABLE `etiqueta_imagen`
-  MODIFY `id_etiqueta_imagen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_etiqueta_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `imagen`
+-- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `imagen_especie`
+-- AUTO_INCREMENT de la tabla `imagen_especie`
 --
 ALTER TABLE `imagen_especie`
   MODIFY `id_imagen_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `imagen_like`
+-- AUTO_INCREMENT de la tabla `imagen_like`
 --
 ALTER TABLE `imagen_like`
-  MODIFY `id_imagen_like` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_imagen_like` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `bosque_especie`
+-- Filtros para la tabla `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
   ADD CONSTRAINT `bosque_especie_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_especie_ibfk_2` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`);
 
 --
--- Constraints for table `bosque_etiqueta`
+-- Filtros para la tabla `bosque_etiqueta`
 --
 ALTER TABLE `bosque_etiqueta`
   ADD CONSTRAINT `bosque_etiqueta_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_etiqueta_ibfk_2` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id_etiqueta`);
 
 --
--- Constraints for table `bosque_imagen`
+-- Filtros para la tabla `bosque_imagen`
 --
 ALTER TABLE `bosque_imagen`
   ADD CONSTRAINT `bosque_imagen_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_imagen_ibfk_2` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`);
 
 --
--- Constraints for table `bosque_like`
+-- Filtros para la tabla `bosque_like`
 --
 ALTER TABLE `bosque_like`
   ADD CONSTRAINT `bosque_like_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_like_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `comentario`
+-- Filtros para la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`),
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `etiqueta_especie`
+-- Filtros para la tabla `etiqueta_especie`
 --
 ALTER TABLE `etiqueta_especie`
   ADD CONSTRAINT `etiqueta_especie_ibfk_1` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`),
   ADD CONSTRAINT `etiqueta_especie_ibfk_2` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id_etiqueta`);
 
 --
--- Constraints for table `etiqueta_imagen`
+-- Filtros para la tabla `etiqueta_imagen`
 --
 ALTER TABLE `etiqueta_imagen`
-  ADD CONSTRAINT `etiqueta_imagen_ibfk_1` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id_etiqueta`),
-  ADD CONSTRAINT `etiqueta_imagen_ibfk_2` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`);
+  ADD CONSTRAINT `etiqueta_imagen_ibfk_1` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id_etiqueta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `etiqueta_imagen_ibfk_2` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `imagen`
+-- Filtros para la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `imagen_especie`
+-- Filtros para la tabla `imagen_especie`
 --
 ALTER TABLE `imagen_especie`
   ADD CONSTRAINT `imagen_especie_ibfk_1` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`),
   ADD CONSTRAINT `imagen_especie_ibfk_2` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`);
 
 --
--- Constraints for table `imagen_like`
+-- Filtros para la tabla `imagen_like`
 --
 ALTER TABLE `imagen_like`
-  ADD CONSTRAINT `imagen_like_ibfk_1` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`),
-  ADD CONSTRAINT `imagen_like_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `imagen_like_ibfk_1` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `imagen_like_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

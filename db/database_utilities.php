@@ -18,7 +18,6 @@ function run_query()
 }
 
 // USER Functions
-
 function get_user_by_id( $id )
 {
 	global $mysqli;
@@ -93,23 +92,24 @@ function delete_user( $id )
 	$mysqli->query($sql);
 }
 
-function upload_images_home_page(){
+/**
+ * () -> lista[id_imagen descendeteporfecha];
+ */
+function get_last_images(){
 	global $mysqli;
 
 	$sql = "SELECT id_imagen FROM imagen ORDER BY id_imagen DESC";
 	$result = $mysqli->query($sql);
-	return $result->fetch_assoc();
+
+	$return = [];
+	while($e = $result->fetch_assoc()){
+		array_push($return,$e);
+	}
+
+	return $return;
 
 }
 
-function upload_image_popup($uid, $id_imagen){
-	global $mysqli;
-
-	$sql = 'SELECT user.email, user.id, imagen.link, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen}'
-	$sql1= 'SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen}';
-	$sql2 = 'SELECT id_imagen_like FROM imagen_like WHERE id_imagen = {$id_imagen} AND id_usuario = {$uid}';
-
-}
 
 /**(uid, id_imagen) => [
   fecha de publicacion, 
@@ -120,7 +120,7 @@ function upload_image_popup($uid, $id_imagen){
   nombre usuario al que pertenece
 ]
  */
-function get_image_popup($uid, $id_imagen){
+function get_image_login($id_imagen, $uid){
 	global $mysqli;
 
 	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
@@ -134,16 +134,18 @@ function get_image_popup($uid, $id_imagen){
 	$return = [];
 	$return["imagen"] = $result_imagen->fetch_assoc();
 	$return["numero_likes"] = $result_likes->fetch_assoc();
-	$return["me_gusta"] =  $result_me_gusta->fetch_assoc();
+
+	$mylike =  $result_me_gusta->fetch_assoc();
+	$return["me_gusta"] = $mylike == NULL ? false : true;
 
 	return $return;
 
 }
-function get_image_popup_not_login($uid, $id_imagen){
+function get_image_not_login($id_imagen){
 	global $mysqli;
 
 	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
-	$sql_likes = "SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen};";
+	$sql_likes = "SELECT COUNT(id_imagen_like) AS nlikes FROM imagen_like WHERE id_imagen = {$id_imagen};";
 	
 
 	$result_imagen = $mysqli->query($sql_imagen);
