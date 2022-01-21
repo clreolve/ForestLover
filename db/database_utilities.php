@@ -1,10 +1,10 @@
 <?php
 require_once('database_credentials.php');
-$mysqli = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE);
+$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 $result = '';
 
 if ($mysqli->connect_errno) {
-    echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+	echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
 
 function run_query()
@@ -12,65 +12,45 @@ function run_query()
 	global $mysqli, $result;
 	$sql = 'SELECT * FROM user';
 	return $mysqli->query($sql);
-
 }
 
 // USER Functions
-function get_user_by_id( $id )
+function get_user_by_id($id)
 {
 	global $mysqli;
 	$sql = "SELECT * FROM user WHERE id = {$id}";
 	$result = $mysqli->query($sql);
-	if($result->num_rows){
+	if ($result->num_rows) {
 		return $result->fetch_assoc();
 	}
 	return false;
 }
 
-function get_user_data_by_email( $email )
+function get_user_data_by_email($email)
 {
 	global $mysqli;
 	$sql = "SELECT * FROM user WHERE email = '{$email}'";
 	$result = $mysqli->query($sql);
-	return $result->fetch_assoc();
+	return json_encode($result->fetch_assoc());
 }
 
-function add_user( $email, $password )
+function add_user($email, $password)
 {
-	
+
 	global $mysqli;
 	$email_sanitized = filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS);
 	$password_sanitized = filter_var($password, FILTER_SANITIZE_SPECIAL_CHARS);
 	$password_hash = password_hash($password_sanitized, PASSWORD_DEFAULT);
-	
+
 	try {
 		$sql = "INSERT INTO user(id, email, password) VALUES (null, '{$email_sanitized}', '{$password_hash}')";
 		$mysqli->query($sql);
 	} catch (Exception $e) {
 		$e->getMessage();
 	}
-
-	/*
-	//el monstruo
-	$sql = "INSERT INTO user(id, email, password) VALUES (null, '?', '?')";
-	if (!($sentencia = $mysqli->prepare($sql))) {
-		echo "Falló la preparación: (" . $mysqli->errno . ") " . $mysqli->error;
-	}
-	if (!$sentencia->bind_param("i", $id)) {
-		echo "Falló la vinculación de parámetros: (" . $sentencia->errno . ") " . $sentencia->error;
-	}
-	if (!$sentencia->bind_param("ss", $email_sanitized,$password_sanitized)) {
-		echo "Falló la vinculación de parámetros: (" . $sentencia->errno . ") " . $sentencia->error;
-	}
-	if (!$sentencia->execute()) {
-		echo "Falló la ejecución: (" . $sentencia->errno . ") " . $sentencia->error;
-	}
-	//$result = $sentencia->get_result();
-	$sentencia->close();
-	*/
 }
 
-function update_user( $id, $email, $password )
+function update_user($id, $email, $password)
 {
 	global $mysqli;
 	$email_sanitized = filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -81,7 +61,7 @@ function update_user( $id, $email, $password )
 	$mysqli->query($sql);
 }
 
-function delete_user( $id )
+function delete_user($id)
 {
 	global $mysqli;
 
@@ -94,19 +74,19 @@ function delete_user( $id )
 /**
  * () -> lista[id_imagen descendeteporfecha];
  */
-function get_last_images(){
+function get_last_images()
+{
 	global $mysqli;
 
 	$sql = "SELECT id_imagen FROM imagen ORDER BY id_imagen DESC";
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
-
+	return json_encode($return);
 }
 
 
@@ -119,7 +99,8 @@ function get_last_images(){
   nombre usuario al que pertenece
 ]
  */
-function get_image_login($id_imagen, $uid){
+function get_image_login($id_imagen, $uid)
+{
 	global $mysqli;
 
 	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
@@ -137,74 +118,77 @@ function get_image_login($id_imagen, $uid){
 	$mylike =  $result_me_gusta->fetch_assoc();
 	$return["me_gusta"] = $mylike == NULL ? false : true;
 
-	return $return;
-
+	return json_encode($return);
 }
-function get_image_not_login($id_imagen){
+function get_image_not_login($id_imagen)
+{
 	global $mysqli;
 
 	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
 	$sql_likes = "SELECT COUNT(id_imagen_like) AS nlikes FROM imagen_like WHERE id_imagen = {$id_imagen};";
-	
+
 
 	$result_imagen = $mysqli->query($sql_imagen);
 	$result_likes = $mysqli->query($sql_likes);
-	
+
 
 	$return = [];
 	$return["imagen"] = $result_imagen->fetch_assoc();
 	$return["numero_likes"] = $result_likes->fetch_assoc();
-	
 
-	return $return;
 
+	return json_encode($return);
 }
 
-function image_comments($id_imagen){
+function image_comments($id_imagen)
+{
 	global $mysqli;
 
 	$sql = "SELECT comentario.id_comentario, comentario.texto, comentario.id_usuario, user.email FROM comentario INNER JOIN user ON comentario.id_usuario = user.id WHERE comentario.id_imagen = {$id_imagen}";
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
+	return json_encode($return);
 }
 
-function image_tags($id_imagen){
+function image_tags($id_imagen)
+{
 	global $mysqli;
 
 	$sql = "SELECT etiqueta_imagen.id_etiqueta, etiqueta.nombre FROM etiqueta_imagen INNER JOIN etiqueta ON etiqueta_imagen.id_etiqueta = etiqueta.id_etiqueta WHERE etiqueta_imagen.id_imagen = {$id_imagen}";
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
+	return json_encode($return);
 }
 
-function species_tags($id_especie){
+function species_tags($id_especie)
+{
 	global $mysqli;
 
 	$sql = " SELECT especie.id_especie , especie.nombre FROM especie INNER JOIN imagen_especie ON especie.id_especie = imagen_especie.id_especie WHERE imagen_especie.id_imagen = {$id_especie}";
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
+	return json_encode($return);
 }
 
 ## pagina bosque
 
-function get_forest_login($id_bosque, $uid){
+function get_forest_login($id_bosque, $uid)
+{
 	global $mysqli;
 
 	$sql_bosque = "SELECT nombre, descripción FROM bosque WHERE id_bosque = {$id_bosque};";
@@ -222,40 +206,43 @@ function get_forest_login($id_bosque, $uid){
 	$mylike =  $result_me_gusta->fetch_assoc();
 	$return["me_gusta"] = $mylike == NULL ? false : true;
 
-	return $return;
+	return json_encode($return);
 }
 
-function get_forest_not_login($id_bosque){
+function get_forest_not_login($id_bosque)
+{
 	global $mysqli;
 
 	$sql_bosque = "SELECT nombre, descripción FROM bosque WHERE id_bosque = {$id_bosque};";
 	$sql_likes = "SELECT COUNT(id_bosque_like) FROM bosque_like WHERE id_bosque = {$id_bosque};";
-	
+
 	$result_bosque = $mysqli->query($sql_bosque);
 	$result_likes = $mysqli->query($sql_likes);
-	
+
 	$return = [];
 	$return["bosque"] = $result_bosque->fetch_assoc();
 	$return["numero_likes"] = $result_likes->fetch_assoc();
-	
-	return $return;
+
+	return json_encode($return);
 }
 
-function forest_species($id_bosque) {
+function forest_species($id_bosque)
+{
 	global $mysqli;
 
 	$sql = "SELECT bosque_especie.id_especie, especie.nombre FROM bosque_especie INNER JOIN especie ON bosque_especie.id_especie = especie.id_especie WHERE bosque_especie.id_bosque= {$id_bosque};";
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
+	return json_encode($return);
 }
 
-function forest_tags($id_bosque){
+function forest_tags($id_bosque)
+{
 
 	global $mysqli;
 
@@ -263,17 +250,15 @@ function forest_tags($id_bosque){
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
-
-
-
+	return json_encode($return);
 }
 
-function get_forest_image($id_bosque){
+function get_forest_image($id_bosque)
+{
 
 	global $mysqli;
 
@@ -281,16 +266,17 @@ function get_forest_image($id_bosque){
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
+	return json_encode($return);
 }
 
 ## adicionales
 
-function get_image_tags($id_etiqueta){
+function get_image_tags($id_etiqueta)
+{
 
 	global $mysqli;
 
@@ -298,13 +284,14 @@ function get_image_tags($id_etiqueta){
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
+	return json_encode($return);
 }
-function get_image_species($id_especie){
+function get_image_species($id_especie)
+{
 
 	global $mysqli;
 
@@ -312,17 +299,17 @@ function get_image_species($id_especie){
 	$result = $mysqli->query($sql);
 
 	$return = [];
-	while($e = $result->fetch_assoc()){
-		array_push($return,$e);
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
 	}
 
-	return $return;
-
+	return json_encode($return);
 }
 
 //Claudio Olvera
 
-function delete_image($id_bosque){
+function delete_image($id_bosque)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -330,7 +317,8 @@ function delete_image($id_bosque){
 	$mysqli->query($sql);
 }
 
-function create_tag($nombre){
+function create_tag($nombre)
+{
 	global $mysqli;
 
 	$nombre = filter_var($nombre, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -338,7 +326,8 @@ function create_tag($nombre){
 	$mysqli->query($sql);
 }
 
-function delete_tag($id_usuario){
+function delete_tag($id_usuario)
+{
 	global $mysqli;
 
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -346,7 +335,8 @@ function delete_tag($id_usuario){
 	$mysqli->query($sql);
 }
 
-function give_tag_forest($id_bosque,$id_usuario){
+function give_tag_forest($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -355,7 +345,8 @@ function give_tag_forest($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function give_tag_image($id_bosque,$id_usuarios){
+function give_tag_image($id_bosque, $id_usuarios)
+{
 	global $mysqli;
 
 	$id_usuarios = filter_var($id_usuarios, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -364,7 +355,8 @@ function give_tag_image($id_bosque,$id_usuarios){
 	$mysqli->query($sql);
 }
 
-function give_tag_spice($id_bosque,$id_usuario){
+function give_tag_spice($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -373,7 +365,8 @@ function give_tag_spice($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function delete_tag_forest($id_bosque,$id_usuario){
+function delete_tag_forest($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -382,7 +375,8 @@ function delete_tag_forest($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function delete_tag_image($id_bosque,$id_usuario){
+function delete_tag_image($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -391,7 +385,8 @@ function delete_tag_image($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function delete_tag_species($id_bosque,$id_usuario){
+function delete_tag_species($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -400,7 +395,8 @@ function delete_tag_species($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function add_comentario($id_usuario,$texto,$id_bosque){
+function add_comentario($id_usuario, $texto, $id_bosque)
+{
 	global $mysqli;
 
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -410,14 +406,16 @@ function add_comentario($id_usuario,$texto,$id_bosque){
 	$mysqli->query($sql);
 }
 
-function delete_comentario($id_comentario){
+function delete_comentario($id_comentario)
+{
 	global $mysqli;
 	$id_comentario = filter_var($id_comentario, FILTER_SANITIZE_SPECIAL_CHARS);
 	$sql = "DELETE FROM comentario WHERE id_comentario = {$id_comentario};";
 	$mysqli->query($sql);
 }
 
-function like_image($id_bosque,$id_usuario){
+function like_image($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -426,7 +424,8 @@ function like_image($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function like_forest($id_bosque,$id_usuario){
+function like_forest($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -435,7 +434,8 @@ function like_forest($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function remove_like_image($id_bosque,$id_usuario){
+function remove_like_image($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -444,7 +444,8 @@ function remove_like_image($id_bosque,$id_usuario){
 	$mysqli->query($sql);
 }
 
-function remove_like_forest($id_bosque,$id_usuario){
+function remove_like_forest($id_bosque, $id_usuario)
+{
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);

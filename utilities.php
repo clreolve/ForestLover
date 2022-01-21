@@ -15,6 +15,10 @@ function islogin(){
 	}
 }
 
+function set_title($title){
+    $_COOKIE['title'] = $title;
+}
+
 function get_uid(){
 	return isset($_SESSION["uid"]) ? $_SESSION["uid"] : "";
 }
