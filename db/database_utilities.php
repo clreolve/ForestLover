@@ -440,7 +440,7 @@ function remove_like_image($id_bosque,$id_usuario){
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "DELETE FROM imagen_like WHERE id_usario = {$id_usuario} AND id_bosque = {$id_bosque};";
+	$sql = "DELETE FROM imagen_like WHERE id_usuario = {$id_usuario} AND id_bosque = {$id_bosque};";
 	$mysqli->query($sql);
 }
 
@@ -449,7 +449,7 @@ function remove_like_forest($id_bosque,$id_usuario){
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "DELETE FROM bosque_like WHERE id_usario = {$id_usuario} AND id_bosque = {$id_bosque};";
+	$sql = "DELETE FROM bosque_like WHERE id_usuario = {$id_usuario} AND id_bosque = {$id_bosque};";
 	$mysqli->query($sql);
 }
 
