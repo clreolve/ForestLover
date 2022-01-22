@@ -3,7 +3,7 @@ include_once('utilities.php');
 set_title("Perfil");
 
 if(isset($_SESSION['uid'])){
-    
+    //
 }else{
     header('location: login.php');
 }

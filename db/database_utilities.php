@@ -99,12 +99,32 @@ function get_last_images()
   nombre usuario al que pertenece
 ]
  */
+function is_like($id_imagen, $uid){
+	global $mysqli;
+
+	$sql_me_gusta = "SELECT id_imagen_like FROM imagen_like WHERE id_imagen = {$id_imagen} AND id_usuario = {$uid};";
+	$result_me_gusta = $mysqli->query($sql_me_gusta);
+	$mylike =  $result_me_gusta->fetch_assoc();
+	return $mylike == NULL ? false : true;
+}
+
+function n_likes($id_imagen){
+	global $mysqli;
+
+	$sql_likes = "SELECT COUNT(id_imagen_like) AS nlikes FROM imagen_like WHERE id_imagen = {$id_imagen};";
+	$result_likes = $mysqli->query($sql_likes);
+	$return= $result_likes->fetch_assoc();
+
+	return json_encode($return);
+
+}
+
 function get_image_login($id_imagen, $uid)
 {
 	global $mysqli;
 
 	$sql_imagen = "SELECT user.email, user.id, imagen.descripcion, imagen.fecha_publicacion FROM imagen INNER JOIN user on imagen.id_usuario = user.id WHERE imagen.id_imagen = {$id_imagen};";
-	$sql_likes = "SELECT COUNT(id_imagen_like) FROM imagen_like WHERE id_imagen = {$id_imagen};";
+	$sql_likes = "SELECT COUNT(id_imagen_like) AS nlikes FROM imagen_like WHERE id_imagen = {$id_imagen};";
 	$sql_me_gusta = "SELECT id_imagen_like FROM imagen_like WHERE id_imagen = {$id_imagen} AND id_usuario = {$uid};";
 
 	$result_imagen = $mysqli->query($sql_imagen);
@@ -120,6 +140,8 @@ function get_image_login($id_imagen, $uid)
 
 	return json_encode($return);
 }
+
+
 function get_image_not_login($id_imagen)
 {
 	global $mysqli;
@@ -414,13 +436,13 @@ function delete_comentario($id_comentario)
 	$mysqli->query($sql);
 }
 
-function like_image($id_bosque, $id_usuario)
+function like_image($id_imagen, $id_usuario)
 {
 	global $mysqli;
 
-	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_imagen = filter_var($id_imagen, FILTER_SANITIZE_SPECIAL_CHARS);
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "INSERT INTO imagen_like(id_bosque, id_usuario) VALUES ({$id_bosque},{$id_usuario});";
+	$sql = "INSERT INTO imagen_like(id_imagen, id_usuario) VALUES ({$id_imagen},{$id_usuario});";
 	$mysqli->query($sql);
 }
 
@@ -434,13 +456,13 @@ function like_forest($id_bosque, $id_usuario)
 	$mysqli->query($sql);
 }
 
-function remove_like_image($id_bosque, $id_usuario)
+function remove_like_image($id_imagen, $id_usuario)
 {
 	global $mysqli;
 
-	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
+	$id_imagen = filter_var($id_imagen, FILTER_SANITIZE_SPECIAL_CHARS);
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "DELETE FROM imagen_like WHERE id_usuario = {$id_usuario} AND id_bosque = {$id_bosque};";
+	$sql = "DELETE FROM imagen_like WHERE id_usuario = {$id_usuario} AND id_imagen = {$id_imagen};";
 	$mysqli->query($sql);
 }
 
