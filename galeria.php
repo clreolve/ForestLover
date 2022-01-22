@@ -16,7 +16,7 @@ function get_content($id_imagen)
     return $imagenes;
 }
 
-if($_POST){
+if ($_POST) {
     //post
 }
 ?>
@@ -49,7 +49,7 @@ if($_POST){
                             <div class="card green">
                                 <div class="card-content">
                                     <div class="card-image">
-                                        <img src="./view.php?id=<?php echo $id_imagen ?>">
+                                        <img class="materialboxed responsive-img" src="./view.php?id=<?php echo $id_imagen ?>">
                                     </div>
                                     <?php
                                     $img = get_content($id_imagen);
@@ -60,23 +60,25 @@ if($_POST){
                                     ?>
                                     <p><?php echo $descripcion ?></p>
                                 </div>
+
                                 <div class="card-action">
-                                    <a href="#">Comentarios</a>
-                                    <p id="n-like-<?php echo $id_imagen ?>"><?php echo $nlikes ?> likes</p>
                                     <?php
                                     if (isset($_SESSION['uid'])) { ?>
-                                        <button class="waves-effect waves-teal btn-flat" onclick="like(<?php echo $id_imagen?>)">
+                                        <button class="waves-effect waves-teal btn-flat" onclick="like(<?php echo $id_imagen ?>)">
                                             <i id="icon-like-<?php echo $id_imagen ?>" class="material-icons">
-                                            <?php 
-                                            if(is_like($id_imagen,intval($_SESSION['uid']))){
-                                                echo 'favorite';
-                                            }else{
-                                                echo 'favorite_border';
-                                            }
-                                            ?>
+                                                <?php
+                                                if (is_like($id_imagen, intval($_SESSION['uid']))) {
+                                                    echo 'favorite';
+                                                } else {
+                                                    echo 'favorite_border';
+                                                }
+                                                ?>
                                             </i>
                                         </button>
                                     <?php } ?>
+
+                                    <p id="n-like-<?php echo $id_imagen ?>"><?php echo $nlikes ?> likes</p>
+                                    <button class="waves-effect waves-teal btn-flat"><i class="material-icons">comment</i></button>
 
                                 </div>
 
@@ -87,7 +89,10 @@ if($_POST){
                 <?php } ?>
             </div>
 
-            <div class="col s12 m4" style="background-color: yellow; height: 600px;">
+            <div class="col s12 m4" style="background-color: yellow;">
+            <?php if(isset($_SESSION['uid'])) {
+                include_once('./templates/cargar_imagen.php');
+            } ?>
             </div>
 
         </div>
