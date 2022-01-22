@@ -27,7 +27,7 @@ if(isset($_SESSION['uid'])){
 
             <div>
                 <label>Descripcion</label>
-                <input type="text" name="descripcion" id="descripcion">
+                <input class="input-field" type="text" name="descripcion" id="descripcion">
             </div>
 
             <h4>Seleccione imagen a cargar</h4>

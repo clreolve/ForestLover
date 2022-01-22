@@ -41,6 +41,7 @@ if (isset($_POST["submit"])) {
         echo "Por favor seleccione imagen a subir.";
     }
 
-}
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit();
 
-?>
+}

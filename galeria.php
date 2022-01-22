@@ -5,6 +5,26 @@ include_once('./db/database_utilities.php');
 
 set_title('Galeria');
 
+//PAGINACION
+if (!isset($_GET['page'])) {
+    header("location: ./galeria.php?page=1");
+    exit();
+}
+
+$images_all = json_decode(get_last_images());
+$images_info = [];
+
+$numero_imagenes = sizeof($images_all);
+$max_por_pagina = isset($_GET['nimg']) ? $_GET['nimg'] : 10;
+$page = $_GET['page'];
+
+$index_inicial = ($page - 1) * $max_por_pagina;
+$index_final = $page * $max_por_pagina;
+$images = array_slice($images_all, $index_inicial, $index_final);
+
+$is_previus_page = $page > 1 ? true : false;
+$is_next_page = $index_final < $numero_imagenes ? true : false;
+//
 function get_content($id_imagen)
 {
     if (isset($_SESSION['uid'])) {
@@ -16,10 +36,8 @@ function get_content($id_imagen)
     return $imagenes;
 }
 
-if ($_POST) {
-    //post
-}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -28,15 +46,9 @@ if ($_POST) {
 <body>
     <?php
     include_once('./templates/navbar.php');
-    $images = json_decode(get_last_images());
-    $images_info = [];
-
-
     ?>
 
     <section>
-
-
         <div class="row s12 m12">
             <div class="col s12 m8">
                 <?php
@@ -87,12 +99,45 @@ if ($_POST) {
 
                     </div>
                 <?php } ?>
+
+                <?php
+                //$is_previus_page && $is_next_page
+                if ($is_next_page && $is_previus_page) { ?>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                <li><a href="./galeria.php?page=<?php echo $page - 1 ?>">
+                                        Anterior</a></li>
+                                <li><a href="./galeria.php?page=<?php echo $page + 1 ?>">Siguiente</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                <?php
+                } else if ($is_previus_page) { ?>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                <li><a href="./galeria.php?page=<?php echo $page - 1 ?>">Anterior</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                <?php } else if ($is_next_page) { ?>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                <li><a href="./galeria.php?page=<?php echo $page + 1 ?>">Siguiente</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                <?php } ?>
             </div>
 
             <div class="col s12 m4" style="background-color: yellow;">
-            <?php if(isset($_SESSION['uid'])) {
-                include_once('./templates/cargar_imagen.php');
-            } ?>
+                <div class="card">
+                    <?php if (isset($_SESSION['uid'])) {
+                        include_once('./templates/cargar_imagen.php');
+                    } ?>
+                </div>
             </div>
 
         </div>
