@@ -11,7 +11,8 @@ set_title('Galeria');
 <?php include_once('./templates/header.php'); ?>
 
 <body>
-    <?php include_once('./templates/navbar.php');
+    <?php
+    include_once('./templates/navbar.php');
     $images = json_decode(get_last_images());
     $images_info = [];
 
@@ -19,32 +20,33 @@ set_title('Galeria');
         $uid = $_SESSION['uid'];
         foreach ($images as $key => $value) {
             $id_imagen = intval($value->id_imagen);
-            $imagenes = get_image_login($id_imagen, $uid);
-            //debug($imagenes);
+            $imagenes = json_decode(get_image_login($id_imagen, $uid));
+            array_push($images_info,json_decode(get_image_login($id_imagen, $uid)));
         }
     } else {
         foreach ($images as $key => $value) {
             $id_imagen = intval($value->id_imagen);
             $imagenes = json_decode(get_image_not_login($id_imagen));
-            //debug($imagenes);
+            array_push($images_info,json_decode(get_image_not_login($id_imagen)));
         }
     }
 
+
     ?>
-    <div>
-        <?php
-        foreach ($images as $key => $value) {
-            $id_imagen = intval($value->id_imagen);
-        ?>
-            <img src="./view.php?id=<?php echo $id_imagen ?>" alt="" srcset="">
-        <?php
-        }
-        ?>
-    </div>
+
+<div>
+    <?php
+    foreach ($images as $key => $value) {
+        $id_imagen = intval($value->id_imagen);
+    ?>
+        <img src="./view.php?id=<?php echo $id_imagen ?>">
+    <?php } ?>
+</div>
+
 
 
 </body>
 
-<?php include_once('./templates/footer.php'); ?>
+<?php include_once('./templates/footer.php');?>
 
 </html>
