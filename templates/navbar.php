@@ -5,7 +5,7 @@ include_once('./templates/navbar.php');
 <?php if (isset($_SESSION['uid'])) { ?>
 
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper teal darken-1">
             <a href="./index.php" class="brand-logo">Forest Lover</a>
             <a href="#" data-target="collapsable_menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -22,24 +22,23 @@ include_once('./templates/navbar.php');
         </div>
     </nav>
 
-    <ul class="sidenav" id="collapsable_menu">
-        <li>Galeria</li>
+    <ul class="sidenav teal darken-1" id="collapsable_menu">
+        <li><a class='white-text' href="./galeria.php">Galeria</a></li>
+        <li><a  class='white-text' href="./explorar.php">Explorar</a></li>
+        <li><a  class='white-text' href="./perfil.php">Perfil</a></li>
+        <li><a   class='white-text' href="./logout.php">Salir</a></li>
         <li>
-            <a href="search.php">
-                <i class="material-icons">search</i>
+            <a  class='white-text' href="search.php">
+                <i class="material-icons white-text">search</i>
             </a>
         </li>
-        <li><a hrefexplorar.php">Ecplorar</a></li>
-        <li><a href="badges.html">Perfil</a></li>
-
-        <li><a href="./logout.php">Salir</a></li>
     </ul>
 
 
 <?php } else { ?>
 
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper teal darken-1">
             <a href="./index.php" class="brand-logo">Forest Lover</a>
             <a href="#" data-target="collapsable_menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -55,13 +54,13 @@ include_once('./templates/navbar.php');
         </div>
     </nav>
 
-    <ul class="sidenav" id="collapsable_menu">
-        <li><a href="./galeria.php">Galeria</a></li>
-        <li><a href="./galeria.php">Explorar</a></li>
-        <li><a href="./perfil.php">Perfil</a></li>
+    <ul class="sidenav teal darken-1" id="collapsable_menu">
+        <li><a class='white-text' href="./galeria.php">Galeria</a></li>
+        <li><a class='white-text' href="./galeria.php">Explorar</a></li>
+        <li><a class='white-text' href="./login.php">Inicie Sesion</a></li>
         <li>
-            <a href="search.php">
-                <i class="material-icons">search</i>
+            <a class='white-text' href="search.php">
+                <i class="material-icons white-text">search</i>
             </a>
         </li>
     </ul>

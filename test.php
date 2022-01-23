@@ -3,8 +3,8 @@
 include_once('./utilities.php');
 include_once('./db/database_utilities.php');
 
-$test = get_user_data_by_email("uwu");
-$test = json_decode($test);
-debug($test->password);
+$res = get_user_by_id(6);
+//$res = intval($res->ncomments);
+debug($res['email']);
 
 ?>

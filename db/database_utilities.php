@@ -119,6 +119,18 @@ function n_likes($id_imagen){
 
 }
 
+function n_comments($id_imagen)
+{
+	global $mysqli;
+
+	$sql = "SELECT count(comentario.id_comentario) AS ncomments FROM comentario INNER JOIN user ON comentario.id_usuario = user.id WHERE comentario.id_imagen = {$id_imagen}";
+	$result = $mysqli->query($sql);
+
+	$return = $result->fetch_assoc();
+
+	return json_encode($return);
+}
+
 function get_image_login($id_imagen, $uid)
 {
 	global $mysqli;

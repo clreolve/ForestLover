@@ -36,6 +36,13 @@ function get_content($id_imagen)
     return $imagenes;
 }
 
+function get_ncomments($id_imagen)
+{
+    $res = json_decode(n_comments($id_imagen));
+    $res = intval($res->ncomments);
+    return $res;
+}
+
 ?>
 
 
@@ -55,11 +62,13 @@ function get_content($id_imagen)
                 <?php
                 foreach ($images as $key => $value) {
                     $id_imagen = intval($value->id_imagen);
+                    $username = get_user_by_id($id_imagen);
+                    $username = $username['email'];
                 ?>
 
                     <div style="margin: 0 auto; background-color: black;">
                         <div>
-                            <div class="card green">
+                            <div class="card">
                                 <div class="card-content">
                                     <div class="card-image">
                                         <img class="materialboxed responsive-img" src="./view.php?id=<?php echo $id_imagen ?>">
@@ -71,17 +80,17 @@ function get_content($id_imagen)
                                     $like = $img->imagen;
 
                                     ?>
-                                    <p><?php echo $descripcion ?></p>
+                                    <p><b class="teal-text">@<?php echo $username;?></b> <?php echo $descripcion ?></p>
                                 </div>
 
-                                <nav class="barra-acciones-galeria">
+                                <nav class="barra-acciones-galeria teal darken-1">
                                     <div>
                                         <ul id="nav-mobile" class="left">
                                             <?php
                                             if (isset($_SESSION['uid'])) { ?>
                                                 <li>
                                                     <a>
-                                                        <button class="waves-effect btn-flat" onclick="like(<?php echo $id_imagen ?>)">
+                                                        <button class="btn-flat" onclick="like(<?php echo $id_imagen ?>)">
                                                             <i id="icon-like-<?php echo $id_imagen ?>" class="material-icons white-text">
                                                                 <?php
                                                                 if (is_like($id_imagen, intval($_SESSION['uid']))) {
@@ -101,9 +110,9 @@ function get_content($id_imagen)
                                                 </a>
                                             </li>
                                             <li>
-                                                <i>
-                                                    <button class="waves-effect btn-flat"><i class="material-icons white-text">comment</i></button>
-                                                </i>
+                                                <a href="./post.php?id=<?php echo $id_imagen ?>">
+                                                    <p><?php echo get_ncomments($id_imagen); ?> Comentarios</p>
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
