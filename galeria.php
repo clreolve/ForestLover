@@ -64,6 +64,12 @@ function get_ncomments($id_imagen)
                 <?php
                 foreach ($images as $key => $value) {
                     $id_imagen = intval($value->id_imagen);
+                    $img = get_content($id_imagen);
+                    $nlikes = $img->numero_likes->nlikes;
+                    $descripcion = $img->imagen->descripcion;
+                    $like = $img->imagen;
+
+                    $username = $img->imagen->email;
                 ?>
 
                     <div style="margin: 0 auto; background-color: black;">
@@ -73,26 +79,6 @@ function get_ncomments($id_imagen)
                                     <div class="card-image">
                                         <img class="materialboxed responsive-img" src="./view.php?id=<?php echo $id_imagen ?>">
                                     </div>
-                                    <?php
-                                    $img = get_content($id_imagen);
-                                    $nlikes = $img->numero_likes->nlikes;
-                                    $descripcion = $img->imagen->descripcion;
-                                    $like = $img->imagen;
-
-                                    $username = $img->imagen->email;
-
-                                    /**
-                                    $usernameid = get_user_by_id($_SESSION['uid']);
-                                    $usernameid = $usernameid['email'];
-                                    debug($usernameid);
-
-                                    debug($img);
-                                    
-
-                                    
-                                     */
-
-                                    ?>
 
                                     <p><b class="teal-text">@<?php echo $username; ?></b> <?php echo $descripcion ?></p>
                                 </div>
@@ -101,6 +87,7 @@ function get_ncomments($id_imagen)
                                     <div>
                                         <ul id="nav-mobile" class="left">
                                             <?php
+                                            // Likes para usuarios Logeados
                                             if (isset($_SESSION['uid'])) { ?>
                                                 <li>
                                                     <a>
@@ -129,7 +116,10 @@ function get_ncomments($id_imagen)
                                                 </a>
                                             </li>
                                             <?php
-                                            if (isset($_SESSION['uid'])) { ?>
+                                            //eliminar imagen
+                                            if (isset($_SESSION['uid'])) {
+                                                //
+                                            ?>
                                                 <li>
                                                     <a>
                                                         <button class="btn-flat" onclick="delete_img(<?php echo $id_imagen ?>)">
