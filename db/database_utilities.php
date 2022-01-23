@@ -439,7 +439,7 @@ function delete_tag_image($id_bosque, $id_usuario)
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "DELETE FROM etiqueta_imagen WHERE id_usuario = {$id_usuario} AND id_bosque{$id_bosque};";
+	$sql = "DELETE FROM etiqueta_imagen WHERE id_usuario = {$id_usuario} AND id_etiqueta ={$id_bosque};";
 	$mysqli->query($sql);
 }
 
