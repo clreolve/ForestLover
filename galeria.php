@@ -190,12 +190,8 @@ function get_ncomments($id_imagen)
 
     </section>
 
-
-
 </body>
 
 <?php include_once('./templates/footer.php'); ?>
-
-
 
 </html>

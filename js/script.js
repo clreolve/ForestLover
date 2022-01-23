@@ -26,6 +26,14 @@ function like(id_imagen){
   });
 }
 
+function delete_tag(id_tag){
+  $.post('./delete_tag.php', {id_tag: id_tag}).done(function(data) {
+    res = JSON.parse(data);
+    nlikes = JSON.parse(res.nlikes);
+    $(`#n-like-${id_imagen}`).html(`${nlikes['nlikes']} likes`);
+  });
+}
+
 function delete_img(id_imagen){
   $.post('./delete_imagen.php', {id_imagen: id_imagen}).done(function(data) {
     res = JSON.parse(data);

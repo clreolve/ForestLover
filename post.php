@@ -23,9 +23,9 @@ if (isset($_SESSION['uid'])) {
 $ncoments = json_decode(n_comments($id_imagen));
 $ncoments = intval($ncoments->ncomments);
 
-debug($imagenes);
+set_title($imagenes->imagen->descripcion);
 
-set_title('Galeria');
+debug($imagenes);
 
 function get_content($id_imagen)
 {
@@ -50,7 +50,9 @@ function get_ncomments($id_imagen)
 
 <!DOCTYPE html>
 <html lang="es">
-<?php include_once('./templates/header.php'); ?>
+<?php
+include_once('./templates/header.php');
+?>
 
 <body>
     <?php
@@ -81,6 +83,7 @@ function get_ncomments($id_imagen)
                         <div>
                             <ul id="nav-mobile" class="left">
                                 <?php
+                                // Likes para usuarios Logeados
                                 if (isset($_SESSION['uid'])) { ?>
                                     <li>
                                         <a>
@@ -108,6 +111,21 @@ function get_ncomments($id_imagen)
                                         <p><?php echo get_ncomments($id_imagen); ?> Comentarios</p>
                                     </a>
                                 </li>
+                                <?php
+                                //eliminar imagen
+                                if (is_image_owner($id_imagen)) {
+                                    //
+                                ?>
+                                    <li>
+                                        <a>
+                                            <button class="btn-flat" onclick="delete_img(<?php echo $id_imagen ?>)">
+                                                <i id="icon-like-<?php echo $id_imagen ?>" class="material-icons white-text">
+                                                    delete
+                                                </i>
+                                            </button>
+                                        </a>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </nav>
@@ -118,6 +136,21 @@ function get_ncomments($id_imagen)
         </div>
     </section>
 
+    <section class="row s12 m12">
+        <div class="card">
+            <div class="card-content row s12 m12">
+                <h4>Categorias:</h4>
+                <?php
+                $tags = json_decode(image_tags(intval($id_imagen)));
+                foreach ($tags as $index => $tag) {
+                ?>
+                    <div class="col s4 m4 ">
+                        <a class="btn"><?php echo $tag->nombre ?></a>
+                        <a class="btn"><i class="material-icons">delete</i></a>
+                    </div>
+                <?php } ?>
+            </div>
+    </section>
 
 </body>
 
