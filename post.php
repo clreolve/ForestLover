@@ -146,7 +146,9 @@ include_once('./templates/header.php');
                 ?>
                     <div class="col s4 m4 ">
                         <a class="btn"><?php echo $tag->nombre ?></a>
-                        <a class="btn"><i class="material-icons">delete</i></a>
+                        <?php if (is_image_owner($id_imagen)) { ?>
+                            <a class="btn"><i class="material-icons">delete</i></a>
+                        <?php } ?>
                     </div>
                 <?php } ?>
             </div>
