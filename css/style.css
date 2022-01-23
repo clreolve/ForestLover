@@ -8,13 +8,13 @@
   margin: 0 auto;
 }
 
-.inner {  
+.inner {
   border: 1px solid black;
 }
 
 .outer {
   border: 1px solid red;
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -38,5 +38,17 @@
   height: 100%;
   border-radius: 5%;
   padding: 1%;
+}
+
+.barra-acciones-galeria {
+  display: flex;
+  align-items: center;
+}
+
+.v_centernav{
+  float: none;
+  margin: 100px auto;
+  width: 300px;
+  height: 300px;
 }
 

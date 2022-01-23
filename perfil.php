@@ -38,8 +38,6 @@ if(isset($_SESSION['uid'])){
                 </div>
                 <button name="submit">Cargar Imagen</button>
             </div>
-
-
         </form>
 
     <?php } ?>

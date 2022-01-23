@@ -74,26 +74,40 @@ function get_content($id_imagen)
                                     <p><?php echo $descripcion ?></p>
                                 </div>
 
-                                <div class="card-action">
-                                    <?php
-                                    if (isset($_SESSION['uid'])) { ?>
-                                        <button class="waves-effect waves-teal btn-flat" onclick="like(<?php echo $id_imagen ?>)">
-                                            <i id="icon-like-<?php echo $id_imagen ?>" class="material-icons">
-                                                <?php
-                                                if (is_like($id_imagen, intval($_SESSION['uid']))) {
-                                                    echo 'favorite';
-                                                } else {
-                                                    echo 'favorite_border';
-                                                }
-                                                ?>
-                                            </i>
-                                        </button>
-                                    <?php } ?>
-
-                                    <p id="n-like-<?php echo $id_imagen ?>"><?php echo $nlikes ?> likes</p>
-                                    <button class="waves-effect waves-teal btn-flat"><i class="material-icons">comment</i></button>
-
-                                </div>
+                                <nav class="barra-acciones-galeria">
+                                    <div>
+                                        <ul id="nav-mobile" class="left">
+                                            <?php
+                                            if (isset($_SESSION['uid'])) { ?>
+                                                <li>
+                                                    <a>
+                                                        <button class="waves-effect btn-flat" onclick="like(<?php echo $id_imagen ?>)">
+                                                            <i id="icon-like-<?php echo $id_imagen ?>" class="material-icons white-text">
+                                                                <?php
+                                                                if (is_like($id_imagen, intval($_SESSION['uid']))) {
+                                                                    echo 'favorite';
+                                                                } else {
+                                                                    echo 'favorite_border';
+                                                                }
+                                                                ?>
+                                                            </i>
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
+                                            <li>
+                                                <a>
+                                                    <p id="n-like-<?php echo $id_imagen ?>"><?php echo $nlikes ?> likes</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <i>
+                                                    <button class="waves-effect btn-flat"><i class="material-icons white-text">comment</i></button>
+                                                </i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
 
                             </div>
                         </div>
@@ -134,7 +148,7 @@ function get_content($id_imagen)
             </div>
 
             <!-- Div de Derecho-->
-            <div class="col s12 m4" style="background-color: yellow;">
+            <div class="col s12 m4" style="background-color: green;">
 
                 <!-- Div de Cargar Imagenes-->
                 <div class="card">
