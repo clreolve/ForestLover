@@ -79,15 +79,21 @@ function get_ncomments($id_imagen)
                                     $descripcion = $img->imagen->descripcion;
                                     $like = $img->imagen;
 
+                                    $username = $img->imagen->email;
+
+                                    /**
                                     $usernameid = get_user_by_id($_SESSION['uid']);
                                     $usernameid = $usernameid['email'];
                                     debug($usernameid);
 
-                                    $username = $img->imagen->email;
+                                    debug($img);
+                                    
 
-                                    debug($username);
+                                    
+                                     */
 
                                     ?>
+
                                     <p><b class="teal-text">@<?php echo $username; ?></b> <?php echo $descripcion ?></p>
                                 </div>
 
