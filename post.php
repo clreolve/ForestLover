@@ -144,10 +144,12 @@ include_once('./templates/header.php');
                 $tags = json_decode(image_tags(intval($id_imagen)));
                 foreach ($tags as $index => $tag) {
                 ?>
-                    <div class="col s4 m4 ">
+                    <div id='tag-<?php echo $tag->id_etiqueta ?>' class="col s4 m4 ">
                         <a class="btn"><?php echo $tag->nombre ?></a>
                         <?php if (is_image_owner($id_imagen)) { ?>
-                            <a class="btn"><i class="material-icons">delete</i></a>
+                            <a class="btn" onclick="delete_tag(<?php echo $tag->id_etiqueta ?>,<?php echo $id_imagen ?>)">
+                                <i class="material-icons">delete</i>
+                            </a>
                         <?php } ?>
                     </div>
                 <?php } ?>

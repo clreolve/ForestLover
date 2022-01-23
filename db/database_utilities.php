@@ -99,7 +99,8 @@ function get_last_images()
   nombre usuario al que pertenece
 ]
  */
-function is_like($id_imagen, $uid){
+function is_like($id_imagen, $uid)
+{
 	global $mysqli;
 
 	$sql_me_gusta = "SELECT id_imagen_like FROM imagen_like WHERE id_imagen = {$id_imagen} AND id_usuario = {$uid};";
@@ -108,7 +109,8 @@ function is_like($id_imagen, $uid){
 	return $mylike == NULL ? false : true;
 }
 
-function is_owner_image($id_imagen, $uid){
+function is_owner_image($id_imagen, $uid)
+{
 	global $mysqli;
 
 	$sql = "SELECT * FROM `imagen` WHERE id_usuario = {$uid} AND id_imagen = {$id_imagen};";
@@ -117,15 +119,15 @@ function is_owner_image($id_imagen, $uid){
 	return $owner == NULL ? false : true;
 }
 
-function n_likes($id_imagen){
+function n_likes($id_imagen)
+{
 	global $mysqli;
 
 	$sql_likes = "SELECT COUNT(id_imagen_like) AS nlikes FROM imagen_like WHERE id_imagen = {$id_imagen};";
 	$result_likes = $mysqli->query($sql_likes);
-	$return= $result_likes->fetch_assoc();
+	$return = $result_likes->fetch_assoc();
 
 	return json_encode($return);
-
 }
 
 function n_comments($id_imagen)
@@ -437,7 +439,6 @@ function delete_tag_image($id_etiqueta, $id_imagen)
 {
 	global $mysqli;
 
-	$id_bosque = filter_var($id_etiqueta, FILTER_SANITIZE_SPECIAL_CHARS);
 	$id_imagen = filter_var($id_imagen, FILTER_SANITIZE_SPECIAL_CHARS);
 	$sql = "DELETE FROM etiqueta_imagen WHERE id_imagen = {$id_imagen} AND id_etiqueta ={$id_etiqueta};";
 	$mysqli->query($sql);
@@ -512,7 +513,8 @@ function remove_like_forest($id_bosque, $id_usuario)
 	$mysqli->query($sql);
 }
 
-function top10_bosque(){
+function top10_bosque()
+{
 	global $mysqli;
 
 	$sql = "SELECT * FROM bosque_nlikes ORDER BY nlikes DESC LIMIT 10;";
@@ -524,7 +526,6 @@ function top10_bosque(){
 	}
 
 	return json_encode($return);
-
 }
 /*
 Especificación del tipo de caracteres para bind de variables
