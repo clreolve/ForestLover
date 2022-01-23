@@ -433,13 +433,13 @@ function delete_tag_forest($id_bosque, $id_usuario)
 	$mysqli->query($sql);
 }
 
-function delete_tag_image($id_bosque, $id_usuario)
+function delete_tag_image($id_bosque, $id_imagen)
 {
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
-	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "DELETE FROM etiqueta_imagen WHERE id_usuario = {$id_usuario} AND id_etiqueta ={$id_bosque};";
+	$id_imagen = filter_var($id_imagen, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "DELETE FROM etiqueta_imagen WHERE id_imagen = {$id_imagen} AND id_etiqueta ={$id_bosque};";
 	$mysqli->query($sql);
 }
 
