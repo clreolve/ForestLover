@@ -68,6 +68,9 @@ function get_ncomments($id_imagen)
                     $nlikes = $img->numero_likes->nlikes;
                     $descripcion = $img->imagen->descripcion;
                     $like = $img->imagen;
+                    $fecha_publicacion = $img->imagen->fecha_publicacion;
+
+                    $fecha_publicacion = fecha($fecha_publicacion);
 
                     $username = $img->imagen->email;
                 ?>
@@ -79,7 +82,7 @@ function get_ncomments($id_imagen)
                                     <div class="card-image">
                                         <img class="materialboxed responsive-img" src="./view.php?id=<?php echo $id_imagen ?>">
                                     </div>
-
+                                    <p><b class="teal-text"><?php echo $fecha_publicacion; ?></b></p>
                                     <p><b class="teal-text">@<?php echo $username; ?></b> <?php echo $descripcion ?></p>
                                 </div>
 
@@ -117,7 +120,7 @@ function get_ncomments($id_imagen)
                                             </li>
                                             <?php
                                             //eliminar imagen
-                                            if (isset($_SESSION['uid'])) {
+                                            if (is_image_owner($id_imagen)) {
                                                 //
                                             ?>
                                                 <li>

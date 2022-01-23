@@ -12,15 +12,7 @@ if ($_SESSION['uid']) {
             $id_imagen = intval($_POST['id_imagen']);
             $uid = intval($_SESSION['uid']);
 
-            $res = get_image_login($id_imagen, $uid);
-            $res = json_decode($res);
-            $res = $res->imagen;
-            $res = $res->email;
-
-            $username =get_user_by_id($uid);
-            $username = $username['email'];
-
-            if($username == $res){
+            if(is_owner_image($id_imagen,$uid)){
                 delete_image($id_imagen);
                 echo json_encode("imagen eliminada");
             }else{

@@ -1,34 +1,53 @@
 <?php
 session_start();
 
-function debug($var) {
-	echo "<pre>";
-	var_dump($var);
-	echo "</pre>";
+function debug($var)
+{
+    echo "<pre>";
+    var_dump($var);
+    echo "</pre>";
 }
 
-function islogin(){
-	if(isset($_SESSION["uid"])){
-		return true;
-	}else{
-		return false;
-	}
+function islogin()
+{
+    if (isset($_SESSION["uid"])) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-function set_title($title){
+function set_title($title)
+{
     $_COOKIE['title'] = $title;
 }
 
-function get_uid(){
-	return isset($_SESSION["uid"]) ? $_SESSION["uid"] : "";
+function get_uid()
+{
+    return isset($_SESSION["uid"]) ? $_SESSION["uid"] : "";
 }
 
-function get_mime_type($filename) {
-    $idx = explode( '.', $filename );
-    $count_explode = count($idx);
-    $idx = strtolower($idx[$count_explode-1]);
+function fecha($fecha)
+{
+    $date = date_create($fecha);
+    return date_format($date, 'd/m/Y H:i:s');
+}
 
-    $mimet = array( 
+function is_image_owner($id_image){
+    if(isset($_SESSION['uid'])){
+        $uid = $_SESSION['uid'];
+        return is_owner_image($id_image,$uid);
+    }
+    return false;
+}
+
+function get_mime_type($filename)
+{
+    $idx = explode('.', $filename);
+    $count_explode = count($idx);
+    $idx = strtolower($idx[$count_explode - 1]);
+
+    $mimet = array(
         'txt' => 'text/plain',
         'htm' => 'text/html',
         'html' => 'text/html',
@@ -87,9 +106,9 @@ function get_mime_type($filename) {
         'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
     );
 
-    if (isset( $mimet[$idx] )) {
-     return $mimet[$idx];
+    if (isset($mimet[$idx])) {
+        return $mimet[$idx];
     } else {
-     return 'application/octet-stream';
+        return 'application/octet-stream';
     }
- }
+}

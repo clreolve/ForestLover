@@ -3,8 +3,8 @@
 include_once('./utilities.php');
 include_once('./db/database_utilities.php');
 
-$res = get_user_by_id(6);
+$res = is_owner_image(11,7);
 //$res = intval($res->ncomments);
-debug($res['email']);
+debug($res);
 
 ?>

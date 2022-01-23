@@ -108,6 +108,15 @@ function is_like($id_imagen, $uid){
 	return $mylike == NULL ? false : true;
 }
 
+function is_owner_image($id_imagen, $uid){
+	global $mysqli;
+
+	$sql = "SELECT * FROM `imagen` WHERE id_usuario = {$uid} AND id_imagen = {$id_imagen};";
+	$result = $mysqli->query($sql);
+	$owner =  $result->fetch_assoc();
+	return $owner == NULL ? false : true;
+}
+
 function n_likes($id_imagen){
 	global $mysqli;
 
@@ -179,6 +188,21 @@ function image_comments($id_imagen)
 	global $mysqli;
 
 	$sql = "SELECT comentario.id_comentario, comentario.texto, comentario.id_usuario, user.email FROM comentario INNER JOIN user ON comentario.id_usuario = user.id WHERE comentario.id_imagen = {$id_imagen}";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
+	}
+
+	return json_encode($return);
+}
+
+function image_last_comments($id_imagen)
+{
+	global $mysqli;
+
+	$sql = "SELECT comentario.id_comentario, comentario.texto, comentario.id_usuario, user.email, comentario.fecha FROM comentario INNER JOIN user ON comentario.id_usuario = user.id WHERE comentario.id_imagen = {$id_imagen} ORDER BY comentario.fecha DESC;";
 	$result = $mysqli->query($sql);
 
 	$return = [];
