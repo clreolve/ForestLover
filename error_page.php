@@ -14,11 +14,11 @@ if (isset($_GET["id_error"])) {
             $message_button = 'Iniciar Sesion/Registrarse';
             $redireccion = './login.php';
             break;
-            case 202:
-                $message = 'Ha ocurrido un error al subir la imagen';
-                $message_button = 'Pagina Principal';
-                $redireccion = './indes.php';
-                break;
+        case 202:
+            $message = 'Ha ocurrido un error al subir la imagen';
+            $message_button = 'Pagina Principal';
+            $redireccion = './index.php';
+            break;
         default:
             $message = 'Deja de Jugar con los mensajes de Error';
             $message_button = 'Vete de aki vandalo';
