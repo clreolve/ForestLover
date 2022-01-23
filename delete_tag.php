@@ -13,6 +13,6 @@ if(!isset($_SESSION['uid'])){
             exit();
         }
     }
-    
+    //borrado
 }
 echo json_encode(false);
