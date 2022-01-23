@@ -50,6 +50,7 @@ function get_content($id_imagen)
 
     <section>
         <div class="row s12 m12">
+            <!-- Div de las Imagenes-->
             <div class="col s12 m8">
                 <?php
                 foreach ($images as $key => $value) {
@@ -132,7 +133,10 @@ function get_content($id_imagen)
                 <?php } ?>
             </div>
 
+            <!-- Div de Derecho-->
             <div class="col s12 m4" style="background-color: yellow;">
+
+                <!-- Div de Cargar Imagenes-->
                 <div class="card">
                     <?php if (isset($_SESSION['uid'])) {
                         include_once('./templates/cargar_imagen.php');

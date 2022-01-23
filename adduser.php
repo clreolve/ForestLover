@@ -10,7 +10,7 @@ if ($_POST) {
         $password = $_POST["password"];
     
         add_user($email,$password);
-        header("location: perfil.php");
+        header("location: index.php");
     }
     
 }else{

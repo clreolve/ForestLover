@@ -3,6 +3,11 @@ include_once('utilities.php');
 include_once('db/database_utilities.php');
 set_title('Inicie Sesión o Registrese');
 
+if(isset($_SESSION['uid'])){
+  header('location: ./galeria.php');
+  exit();
+}
+
 if ($_POST) {
   $email = isset($_POST['email']) ? $_POST['email'] : '';
   $password = isset($_POST['password']) ? $_POST['password'] : '';
@@ -11,10 +16,11 @@ if ($_POST) {
 
   if (password_verify($password, $user_data->password)) {
     $_SESSION['uid'] = $user_data->id;
-    header('location: perfil.php');
+    header('location: galeria.php');
     die();
   } else {
-    die('datos incorrectos');
+    header('location: ./error_page.php?id_error=101');
+    die();
   }
 }
 

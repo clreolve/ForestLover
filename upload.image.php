@@ -33,9 +33,9 @@ if (isset($_POST["submit"])) {
         $insertar = $mysqli->query($sql);        
         
         if($insertar){
-            echo "Archivo Subido Correctamente.";
+            header('location: ./index.php');
         }else{
-            echo "Ha fallado la subida, reintente nuevamente.";
+            header('location: ./error.php?id_error=202');
         }
     } else {
         echo "Por favor seleccione imagen a subir.";

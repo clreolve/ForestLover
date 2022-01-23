@@ -13,7 +13,7 @@
 
   <div>
     <label>Descripcion</label>
-    <textarea id="text" class="materialize-textarea" name="descripcion" id="descripcion"></textarea>
+    <textarea id="text" class="materialize-textarea" name="descripcion" id="descripcion" maxlength="300"></textarea>
   </div>
 
   <div class="file-field input-field">
@@ -31,4 +31,6 @@
   <button class="btn waves-effect waves-light" type="submit" name="submit">Enviar
     <i class="material-icons right">send</i>
   </button>
+
+  
 </form>
