@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2022 at 06:36 AM
+-- Generation Time: Jan 24, 2022 at 12:38 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -77,6 +77,14 @@ CREATE TABLE `bosque_imagen` (
   `id_imagen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bosque_imagen`
+--
+
+INSERT INTO `bosque_imagen` (`id_bosque_imagen`, `id_bosque`, `id_imagen`) VALUES
+(1, 1, 16),
+(2, 1, 17);
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +157,13 @@ CREATE TABLE `especie` (
   `nombre` text NOT NULL,
   `link` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `especie`
+--
+
+INSERT INTO `especie` (`id_especie`, `nombre`, `link`) VALUES
+(1, 'Margarita.\r\n', '');
 
 -- --------------------------------------------------------
 
@@ -233,6 +248,15 @@ CREATE TABLE `etiqueta_imagen` (
   `id_etiqueta` int(11) NOT NULL,
   `id_imagen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `etiqueta_imagen`
+--
+
+INSERT INTO `etiqueta_imagen` (`id_etiqueta_imagen`, `id_etiqueta`, `id_imagen`) VALUES
+(3, 5, 17),
+(4, 13, 16),
+(5, 13, 15);
 
 -- --------------------------------------------------------
 
@@ -481,7 +505,7 @@ ALTER TABLE `bosque_etiqueta`
 -- AUTO_INCREMENT for table `bosque_imagen`
 --
 ALTER TABLE `bosque_imagen`
-  MODIFY `id_bosque_imagen` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bosque_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `bosque_like`
@@ -499,7 +523,7 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT for table `especie`
 --
 ALTER TABLE `especie`
-  MODIFY `id_especie` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_especie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `etiqueta`
@@ -517,7 +541,7 @@ ALTER TABLE `etiqueta_especie`
 -- AUTO_INCREMENT for table `etiqueta_imagen`
 --
 ALTER TABLE `etiqueta_imagen`
-  MODIFY `id_etiqueta_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_etiqueta_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `imagen`

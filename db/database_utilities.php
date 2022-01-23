@@ -512,7 +512,7 @@ function remove_like_forest($id_bosque, $id_usuario)
 	$sql = "DELETE FROM bosque_like WHERE id_usuario = {$id_usuario} AND id_bosque = {$id_bosque};";
 	$mysqli->query($sql);
 }
-
+#Vivanco
 function top10_bosque()
 {
 	global $mysqli;
@@ -525,6 +525,22 @@ function top10_bosque()
 		array_push($return, $e);
 	}
 
+	return json_encode($return);
+}
+
+function get_image_bosque($id_bosque){
+
+	global $mysqli;
+	
+	$sql = "SELECT id_imagen FROM bosque_imagen WHERE id_bosque ={$id_bosque} ORDER BY id_imagen DESC;";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+
+	while($e = $result->fetch_assoc()){
+		array_push($return, $e);
+
+	}
 	return json_encode($return);
 }
 /*

@@ -31,8 +31,7 @@ function search(){
         }else if(isset($_GET['forest'])){
 
             $id_bosque = intval($_GET['forest']);
-            //return json_decode();
-
+            return json_decode(get_image_bosque($id_bosque));
 
         }
     }
