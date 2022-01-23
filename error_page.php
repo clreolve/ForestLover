@@ -19,6 +19,11 @@ if (isset($_GET["id_error"])) {
             $message_button = 'Pagina Principal';
             $redireccion = './index.php';
             break;
+        case 303:
+            $message = 'El Post no existe';
+            $message_button = 'Pagina Principal';
+            $redireccion = './index.php';
+            break;
         default:
             $message = 'Deja de Jugar con los mensajes de Error';
             $message_button = 'Vete de aki vandalo';

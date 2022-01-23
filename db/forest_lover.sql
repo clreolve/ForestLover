@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 23-01-2022 a las 02:11:21
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.11
+-- Host: 127.0.0.1
+-- Generation Time: Jan 23, 2022 at 06:36 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `forest_lover`
+-- Database: `forest_lover`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bosque`
+-- Table structure for table `bosque`
 --
 
 CREATE TABLE `bosque` (
@@ -33,10 +33,18 @@ CREATE TABLE `bosque` (
   `descripción` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bosque`
+--
+
+INSERT INTO `bosque` (`id_bosque`, `nombre`, `descripción`) VALUES
+(1, 'Bosque Protector Prosperina', 'xdxdxdxxd'),
+(2, 'Parque Nacional Yellowstone', 'waaaaaaaaaaaaaaaaaaaaaaaadas');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bosque_especie`
+-- Table structure for table `bosque_especie`
 --
 
 CREATE TABLE `bosque_especie` (
@@ -48,7 +56,7 @@ CREATE TABLE `bosque_especie` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bosque_etiqueta`
+-- Table structure for table `bosque_etiqueta`
 --
 
 CREATE TABLE `bosque_etiqueta` (
@@ -60,7 +68,7 @@ CREATE TABLE `bosque_etiqueta` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bosque_imagen`
+-- Table structure for table `bosque_imagen`
 --
 
 CREATE TABLE `bosque_imagen` (
@@ -72,7 +80,7 @@ CREATE TABLE `bosque_imagen` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bosque_like`
+-- Table structure for table `bosque_like`
 --
 
 CREATE TABLE `bosque_like` (
@@ -81,10 +89,35 @@ CREATE TABLE `bosque_like` (
   `id_bosque` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bosque_like`
+--
+
+INSERT INTO `bosque_like` (`id_bosque_like`, `id_usuario`, `id_bosque`) VALUES
+(1, 6, 1),
+(2, 12, 1),
+(3, 3, 1),
+(4, 12, 2),
+(5, 6, 2),
+(6, 4, 1);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comentario`
+-- Stand-in structure for view `bosque_nlikes`
+-- (See below for the actual view)
+--
+CREATE TABLE `bosque_nlikes` (
+`id_bosque` int(11)
+,`nombre` text
+,`descripción` text
+,`nlikes` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comentario`
 --
 
 CREATE TABLE `comentario` (
@@ -96,7 +129,7 @@ CREATE TABLE `comentario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `comentario`
+-- Dumping data for table `comentario`
 --
 
 INSERT INTO `comentario` (`id_comentario`, `id_usuario`, `texto`, `id_imagen`, `fecha`) VALUES
@@ -108,7 +141,7 @@ INSERT INTO `comentario` (`id_comentario`, `id_usuario`, `texto`, `id_imagen`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `especie`
+-- Table structure for table `especie`
 --
 
 CREATE TABLE `especie` (
@@ -120,7 +153,7 @@ CREATE TABLE `especie` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `etiqueta`
+-- Table structure for table `etiqueta`
 --
 
 CREATE TABLE `etiqueta` (
@@ -128,10 +161,59 @@ CREATE TABLE `etiqueta` (
   `nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `etiqueta`
+--
+
+INSERT INTO `etiqueta` (`id_etiqueta`, `nombre`) VALUES
+(3, 'Árbol'),
+(4, 'Arbusto'),
+(5, 'Flor'),
+(6, 'Cactus'),
+(7, 'Cicas'),
+(8, 'Cicas'),
+(9, 'Palmera'),
+(10, 'Anuales'),
+(11, 'Perennes'),
+(12, 'Bulbosa'),
+(13, 'Acuática'),
+(14, 'De interior'),
+(15, 'Trepadora'),
+(16, 'Aromáticas'),
+(17, 'De huerto'),
+(18, 'Carnívoras'),
+(19, 'Orquídeas'),
+(20, 'Hoja caducada'),
+(21, 'Hoja caducada'),
+(22, 'Frutal'),
+(23, 'Ornamental'),
+(24, 'Terrestre'),
+(25, 'Briofita'),
+(26, 'Vascular'),
+(27, 'Pteridofitas'),
+(28, 'Gimnospermas'),
+(29, 'Angiospermas'),
+(30, 'Margaritas'),
+(31, 'Rosas'),
+(32, 'Tulipán'),
+(33, 'Claveles'),
+(34, 'Jazmín'),
+(36, 'Frondosas'),
+(37, 'Coníferas'),
+(38, 'Mixto'),
+(39, 'Perennifolio'),
+(40, 'Caducifolio'),
+(41, 'Boreal'),
+(42, 'Templado'),
+(43, 'Subtropical'),
+(44, 'Tropical'),
+(45, 'Primarios'),
+(46, 'Antropogénicos');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `etiqueta_especie`
+-- Table structure for table `etiqueta_especie`
 --
 
 CREATE TABLE `etiqueta_especie` (
@@ -143,7 +225,7 @@ CREATE TABLE `etiqueta_especie` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `etiqueta_imagen`
+-- Table structure for table `etiqueta_imagen`
 --
 
 CREATE TABLE `etiqueta_imagen` (
@@ -155,7 +237,7 @@ CREATE TABLE `etiqueta_imagen` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `imagen`
+-- Table structure for table `imagen`
 --
 
 CREATE TABLE `imagen` (
@@ -167,7 +249,7 @@ CREATE TABLE `imagen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `imagen`
+-- Dumping data for table `imagen`
 --
 
 INSERT INTO `imagen` (`id_imagen`, `fecha_publicacion`, `file`, `id_usuario`, `descripcion`) VALUES
@@ -198,7 +280,7 @@ INSERT INTO `imagen` (`id_imagen`, `fecha_publicacion`, `file`, `id_usuario`, `d
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `imagen_especie`
+-- Table structure for table `imagen_especie`
 --
 
 CREATE TABLE `imagen_especie` (
@@ -210,7 +292,7 @@ CREATE TABLE `imagen_especie` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `imagen_like`
+-- Table structure for table `imagen_like`
 --
 
 CREATE TABLE `imagen_like` (
@@ -220,7 +302,7 @@ CREATE TABLE `imagen_like` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `imagen_like`
+-- Dumping data for table `imagen_like`
 --
 
 INSERT INTO `imagen_like` (`id_imagen_like`, `id_imagen`, `id_usuario`) VALUES
@@ -236,7 +318,7 @@ INSERT INTO `imagen_like` (`id_imagen_like`, `id_imagen`, `id_usuario`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -247,27 +329,37 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `fecha_inscripcion`) VALUES
 (3, 'php', '$2y$10$I3DtTw2YCboxclIrNwGxeOpMn.oLfcLh.ajq8jwZ9iKvkFtVFCGmS', '2022-01-16 15:41:00'),
 (4, 'admin', '$2y$10$cxPhDYJOiTpOoWV97HYPzO6C3u10wIEPUypQ7IGVJKFbHpJfkiOU2', '2022-01-16 15:41:00'),
 (6, 'uwu', '$2y$10$vMzLKQYE4wrlcpvL9L/v3OGUET.4Rtflnaym7IucR78AsFPPXpDrW', '2022-01-16 15:41:00'),
-(8, 'saraguro', '$2y$10$Pe1IHW8OOXxXr9dofO/hL.eTFCWyUbhr5nzzHZj5mZR2ie4JnQe3W', '2022-01-16 22:53:26');
+(8, 'saraguro', '$2y$10$Pe1IHW8OOXxXr9dofO/hL.eTFCWyUbhr5nzzHZj5mZR2ie4JnQe3W', '2022-01-16 22:53:26'),
+(12, 'mmvhp', '$2y$10$hqzIpe2PnGyLvgRtJsTEkOpkSr9Y27lti3ZGIM7e4DI6YHMQwp1sS', '2022-01-22 21:27:02');
+
+-- --------------------------------------------------------
 
 --
--- Índices para tablas volcadas
+-- Structure for view `bosque_nlikes`
+--
+DROP TABLE IF EXISTS `bosque_nlikes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bosque_nlikes`  AS SELECT `bosque`.`id_bosque` AS `id_bosque`, `bosque`.`nombre` AS `nombre`, `bosque`.`descripción` AS `descripción`, count(`bosque_like`.`id_usuario`) AS `nlikes` FROM (`bosque_like` join `bosque` on(`bosque_like`.`id_bosque` = `bosque`.`id_bosque`)) GROUP BY `bosque`.`id_bosque` ;
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `bosque`
+-- Indexes for table `bosque`
 --
 ALTER TABLE `bosque`
   ADD PRIMARY KEY (`id_bosque`);
 
 --
--- Indices de la tabla `bosque_especie`
+-- Indexes for table `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
   ADD PRIMARY KEY (`id_bosque_especie`),
@@ -275,7 +367,7 @@ ALTER TABLE `bosque_especie`
   ADD KEY `id_especie` (`id_especie`);
 
 --
--- Indices de la tabla `bosque_etiqueta`
+-- Indexes for table `bosque_etiqueta`
 --
 ALTER TABLE `bosque_etiqueta`
   ADD PRIMARY KEY (`id_bosque_etiqueta`),
@@ -283,7 +375,7 @@ ALTER TABLE `bosque_etiqueta`
   ADD KEY `id_etiqueta` (`id_etiqueta`);
 
 --
--- Indices de la tabla `bosque_imagen`
+-- Indexes for table `bosque_imagen`
 --
 ALTER TABLE `bosque_imagen`
   ADD PRIMARY KEY (`id_bosque_imagen`),
@@ -291,7 +383,7 @@ ALTER TABLE `bosque_imagen`
   ADD KEY `id_imagen` (`id_imagen`);
 
 --
--- Indices de la tabla `bosque_like`
+-- Indexes for table `bosque_like`
 --
 ALTER TABLE `bosque_like`
   ADD PRIMARY KEY (`id_bosque_like`),
@@ -299,7 +391,7 @@ ALTER TABLE `bosque_like`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `comentario`
+-- Indexes for table `comentario`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_comentario`),
@@ -307,19 +399,19 @@ ALTER TABLE `comentario`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `especie`
+-- Indexes for table `especie`
 --
 ALTER TABLE `especie`
   ADD PRIMARY KEY (`id_especie`);
 
 --
--- Indices de la tabla `etiqueta`
+-- Indexes for table `etiqueta`
 --
 ALTER TABLE `etiqueta`
   ADD PRIMARY KEY (`id_etiqueta`);
 
 --
--- Indices de la tabla `etiqueta_especie`
+-- Indexes for table `etiqueta_especie`
 --
 ALTER TABLE `etiqueta_especie`
   ADD PRIMARY KEY (`id_etiqueta_especie`),
@@ -327,7 +419,7 @@ ALTER TABLE `etiqueta_especie`
   ADD KEY `id_etiqueta` (`id_etiqueta`);
 
 --
--- Indices de la tabla `etiqueta_imagen`
+-- Indexes for table `etiqueta_imagen`
 --
 ALTER TABLE `etiqueta_imagen`
   ADD PRIMARY KEY (`id_etiqueta_imagen`),
@@ -335,14 +427,14 @@ ALTER TABLE `etiqueta_imagen`
   ADD KEY `id_imagen` (`id_imagen`);
 
 --
--- Indices de la tabla `imagen`
+-- Indexes for table `imagen`
 --
 ALTER TABLE `imagen`
   ADD PRIMARY KEY (`id_imagen`),
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `imagen_especie`
+-- Indexes for table `imagen_especie`
 --
 ALTER TABLE `imagen_especie`
   ADD PRIMARY KEY (`id_imagen_especie`),
@@ -350,7 +442,7 @@ ALTER TABLE `imagen_especie`
   ADD KEY `id_imagen` (`id_imagen`);
 
 --
--- Indices de la tabla `imagen_like`
+-- Indexes for table `imagen_like`
 --
 ALTER TABLE `imagen_like`
   ADD PRIMARY KEY (`id_imagen_like`),
@@ -358,167 +450,167 @@ ALTER TABLE `imagen_like`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `bosque`
+-- AUTO_INCREMENT for table `bosque`
 --
 ALTER TABLE `bosque`
-  MODIFY `id_bosque` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bosque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `bosque_especie`
+-- AUTO_INCREMENT for table `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
   MODIFY `id_bosque_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `bosque_etiqueta`
+-- AUTO_INCREMENT for table `bosque_etiqueta`
 --
 ALTER TABLE `bosque_etiqueta`
   MODIFY `id_bosque_etiqueta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `bosque_imagen`
+-- AUTO_INCREMENT for table `bosque_imagen`
 --
 ALTER TABLE `bosque_imagen`
   MODIFY `id_bosque_imagen` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `bosque_like`
+-- AUTO_INCREMENT for table `bosque_like`
 --
 ALTER TABLE `bosque_like`
-  MODIFY `id_bosque_like` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bosque_like` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `comentario`
+-- AUTO_INCREMENT for table `comentario`
 --
 ALTER TABLE `comentario`
   MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `especie`
+-- AUTO_INCREMENT for table `especie`
 --
 ALTER TABLE `especie`
   MODIFY `id_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `etiqueta`
+-- AUTO_INCREMENT for table `etiqueta`
 --
 ALTER TABLE `etiqueta`
-  MODIFY `id_etiqueta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_etiqueta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT de la tabla `etiqueta_especie`
+-- AUTO_INCREMENT for table `etiqueta_especie`
 --
 ALTER TABLE `etiqueta_especie`
   MODIFY `id_etiqueta_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `etiqueta_imagen`
+-- AUTO_INCREMENT for table `etiqueta_imagen`
 --
 ALTER TABLE `etiqueta_imagen`
   MODIFY `id_etiqueta_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `imagen`
+-- AUTO_INCREMENT for table `imagen`
 --
 ALTER TABLE `imagen`
   MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT de la tabla `imagen_especie`
+-- AUTO_INCREMENT for table `imagen_especie`
 --
 ALTER TABLE `imagen_especie`
   MODIFY `id_imagen_especie` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `imagen_like`
+-- AUTO_INCREMENT for table `imagen_like`
 --
 ALTER TABLE `imagen_like`
   MODIFY `id_imagen_like` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
--- AUTO_INCREMENT de la tabla `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `bosque_especie`
+-- Constraints for table `bosque_especie`
 --
 ALTER TABLE `bosque_especie`
   ADD CONSTRAINT `bosque_especie_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_especie_ibfk_2` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`);
 
 --
--- Filtros para la tabla `bosque_etiqueta`
+-- Constraints for table `bosque_etiqueta`
 --
 ALTER TABLE `bosque_etiqueta`
   ADD CONSTRAINT `bosque_etiqueta_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_etiqueta_ibfk_2` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id_etiqueta`);
 
 --
--- Filtros para la tabla `bosque_imagen`
+-- Constraints for table `bosque_imagen`
 --
 ALTER TABLE `bosque_imagen`
   ADD CONSTRAINT `bosque_imagen_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_imagen_ibfk_2` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`);
 
 --
--- Filtros para la tabla `bosque_like`
+-- Constraints for table `bosque_like`
 --
 ALTER TABLE `bosque_like`
   ADD CONSTRAINT `bosque_like_ibfk_1` FOREIGN KEY (`id_bosque`) REFERENCES `bosque` (`id_bosque`),
   ADD CONSTRAINT `bosque_like_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`);
 
 --
--- Filtros para la tabla `comentario`
+-- Constraints for table `comentario`
 --
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`),
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`);
 
 --
--- Filtros para la tabla `etiqueta_especie`
+-- Constraints for table `etiqueta_especie`
 --
 ALTER TABLE `etiqueta_especie`
   ADD CONSTRAINT `etiqueta_especie_ibfk_1` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`),
   ADD CONSTRAINT `etiqueta_especie_ibfk_2` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id_etiqueta`);
 
 --
--- Filtros para la tabla `etiqueta_imagen`
+-- Constraints for table `etiqueta_imagen`
 --
 ALTER TABLE `etiqueta_imagen`
   ADD CONSTRAINT `etiqueta_imagen_ibfk_1` FOREIGN KEY (`id_etiqueta`) REFERENCES `etiqueta` (`id_etiqueta`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `etiqueta_imagen_ibfk_2` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `imagen`
+-- Constraints for table `imagen`
 --
 ALTER TABLE `imagen`
   ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `imagen_especie`
+-- Constraints for table `imagen_especie`
 --
 ALTER TABLE `imagen_especie`
   ADD CONSTRAINT `imagen_especie_ibfk_1` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`),
   ADD CONSTRAINT `imagen_especie_ibfk_2` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`);
 
 --
--- Filtros para la tabla `imagen_like`
+-- Constraints for table `imagen_like`
 --
 ALTER TABLE `imagen_like`
   ADD CONSTRAINT `imagen_like_ibfk_1` FOREIGN KEY (`id_imagen`) REFERENCES `imagen` (`id_imagen`) ON DELETE CASCADE ON UPDATE CASCADE,
