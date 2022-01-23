@@ -25,3 +25,10 @@ function like(id_imagen){
     $(`#n-like-${id_imagen}`).html(`${nlikes['nlikes']} likes`);
   });
 }
+
+function delete_img(id_imagen){
+  $.post('./delete_imagen.php', {id_imagen: id_imagen}).done(function(data) {
+    res = JSON.parse(data);
+    console.log(res);
+  });
+}

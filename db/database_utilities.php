@@ -347,7 +347,7 @@ function delete_image($id_bosque)
 	global $mysqli;
 
 	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "DELETE FROM imagen WHERE id_bosque = {$id_bosque};";
+	$sql = "DELETE FROM imagen WHERE id_imagen = {$id_bosque};";
 	$mysqli->query($sql);
 }
 

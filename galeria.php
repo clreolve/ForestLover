@@ -43,6 +43,8 @@ function get_ncomments($id_imagen)
     return $res;
 }
 
+
+
 ?>
 
 
@@ -77,10 +79,16 @@ function get_ncomments($id_imagen)
                                     $descripcion = $img->imagen->descripcion;
                                     $like = $img->imagen;
 
+                                    $usernameid = get_user_by_id($_SESSION['uid']);
+                                    $usernameid = $usernameid['email'];
+                                    debug($usernameid);
+
                                     $username = $img->imagen->email;
 
+                                    debug($username);
+
                                     ?>
-                                    <p><b class="teal-text">@<?php echo $username;?></b> <?php echo $descripcion ?></p>
+                                    <p><b class="teal-text">@<?php echo $username; ?></b> <?php echo $descripcion ?></p>
                                 </div>
 
                                 <nav class="barra-acciones-galeria teal darken-1">
@@ -114,6 +122,18 @@ function get_ncomments($id_imagen)
                                                     <p><?php echo get_ncomments($id_imagen); ?> Comentarios</p>
                                                 </a>
                                             </li>
+                                            <?php
+                                            if (isset($_SESSION['uid'])) { ?>
+                                                <li>
+                                                    <a>
+                                                        <button class="btn-flat" onclick="delete_img(<?php echo $id_imagen ?>)">
+                                                            <i id="icon-like-<?php echo $id_imagen ?>" class="material-icons white-text">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </nav>
