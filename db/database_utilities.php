@@ -488,7 +488,20 @@ function remove_like_forest($id_bosque, $id_usuario)
 	$mysqli->query($sql);
 }
 
+function top10_bosque(){
+	global $mysqli;
 
+	$sql = "SELECT * FROM bosque_nlikes ORDER BY nlikes DESC LIMIT 10;";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
+	}
+
+	return json_encode($return);
+
+}
 /*
 Especificación del tipo de caracteres para bind de variables
 Carácter	Descripción
