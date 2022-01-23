@@ -62,8 +62,6 @@ function get_ncomments($id_imagen)
                 <?php
                 foreach ($images as $key => $value) {
                     $id_imagen = intval($value->id_imagen);
-                    $username = get_user_by_id($id_imagen);
-                    $username = $username['email'];
                 ?>
 
                     <div style="margin: 0 auto; background-color: black;">
@@ -78,6 +76,8 @@ function get_ncomments($id_imagen)
                                     $nlikes = $img->numero_likes->nlikes;
                                     $descripcion = $img->imagen->descripcion;
                                     $like = $img->imagen;
+
+                                    $username = $img->imagen->email;
 
                                     ?>
                                     <p><b class="teal-text">@<?php echo $username;?></b> <?php echo $descripcion ?></p>
