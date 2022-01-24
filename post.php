@@ -23,9 +23,10 @@ if (isset($_SESSION['uid'])) {
 $ncoments = json_decode(n_comments($id_imagen));
 $ncoments = intval($ncoments->ncomments);
 
-set_title($imagenes->imagen->descripcion);
+$fecha_publicacion = $imagenes->imagen->fecha_publicacion;
+$fecha_publicacion = fecha($fecha_publicacion);
 
-debug($imagenes);
+set_title($imagenes->imagen->descripcion);
 
 function get_content($id_imagen)
 {
@@ -76,6 +77,7 @@ include_once('./templates/header.php');
                         $username = $img->imagen->email;
 
                         ?>
+                        <p class="teal-text"><b><?php echo $fecha_publicacion ?></b></p>
                         <p><b class="teal-text">@<?php echo $username; ?></b> <?php echo $descripcion ?></p>
                     </div>
 
