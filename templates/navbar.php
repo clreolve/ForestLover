@@ -10,7 +10,7 @@ include_once('./templates/navbar.php');
             <a href="#" data-target="collapsable_menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="./galeria.php">Galeria</a></li>
-                <li><a href="./explorar.php">Explorar</a></li>
+                
                 <li><a href="./perfil.php">Perfil</a></li>
                 <li><a href="./logout.php">Salir</a></li>
                 <li>
@@ -24,7 +24,7 @@ include_once('./templates/navbar.php');
 
     <ul class="sidenav light-green darken-1" id="collapsable_menu">
         <li><a class='white-text' href="./galeria.php">Galeria</a></li>
-        <li><a  class='white-text' href="./explorar.php">Explorar</a></li>
+        
         <li><a  class='white-text' href="./perfil.php">Perfil</a></li>
         <li><a   class='white-text' href="./logout.php">Salir</a></li>
         <li>
@@ -43,7 +43,7 @@ include_once('./templates/navbar.php');
             <a href="#" data-target="collapsable_menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="./galeria.php">Galeria</a></li>
-                <li><a href="./galeria.php">Explorar</a></li>
+                
                 <li><a href="./login.php">Inicie Sesion</a></li>
                 <li>
                     <a href="./buscar.php?text=*">
@@ -56,7 +56,7 @@ include_once('./templates/navbar.php');
 
     <ul class="sidenav light-green darken-1" id="collapsable_menu">
         <li><a class='white-text' href="./galeria.php">Galeria</a></li>
-        <li><a class='white-text' href="./galeria.php">Explorar</a></li>
+        
         <li><a class='white-text' href="./login.php">Inicie Sesion</a></li>
         <li>
             <a class='white-text' href="./buscar.php?text=*">
