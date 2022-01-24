@@ -454,14 +454,14 @@ function delete_tag_species($id_bosque, $id_usuario)
 	$mysqli->query($sql);
 }
 
-function add_comentario($id_usuario, $texto, $id_bosque)
+function add_comentario($id_usuario, $texto, $id_imagen)
 {
 	global $mysqli;
 
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
 	$texto = filter_var($texto, FILTER_SANITIZE_SPECIAL_CHARS);
-	$id_bosque = filter_var($id_bosque, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "INSERT INTO comentario (id_usuario, texto, id_bosque) VALUES ({$id_usuario}, '{$texto}', {$id_bosque});";
+	$id_imagen = filter_var($id_imagen, FILTER_SANITIZE_SPECIAL_CHARS);
+	$sql = "INSERT INTO comentario (id_usuario, texto, id_imagen) VALUES ({$id_usuario}, '{$texto}', {$id_imagen});";
 	$mysqli->query($sql);
 }
 
