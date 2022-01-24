@@ -43,15 +43,4 @@ function search()
     return [];
 }
 
-/*function matchText($texto){
-    if($_GET){
-        if(isset($_GET[$texto])){
-            $ntexto = strval($_GET[$texto]);
-            return json_decode(get_commits_by_text($ntexto));
-        }
-    }  
-    return [];
-}
-**/
-
 debug(search());
