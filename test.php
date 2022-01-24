@@ -5,7 +5,7 @@ include_once('./db/database_utilities.php');
 
 $res = is_image_owner(11);
 //$res = intval($res->ncomments);
-debug($res);
+add_comentario(3,"qwew",13);
 
 
 ?>
