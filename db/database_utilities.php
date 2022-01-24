@@ -543,6 +543,22 @@ function get_image_bosque($id_bosque){
 	}
 	return json_encode($return);
 }
+
+function get_commits_by_text($texto){
+	global $mysqli;
+
+	$sql = "SELECT * FROM comentario WHERE texto LIKE '%$texto%';";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
+	}
+
+	return json_encode($return);
+
+}
+
 /*
 Especificación del tipo de caracteres para bind de variables
 Carácter	Descripción
