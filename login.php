@@ -45,7 +45,7 @@ if ($_POST) {
         <input type="text" name="email" id="email">
 
         <label>Contraseña</label>
-        <input type="text" name="password" id="password">
+        <input type="password" name="password" id="password">
         <button class="btn waves-effect waves-light" type="submit" name="action">Entrar
     <i class="material-icons right">send</i>
   </button>
@@ -63,7 +63,7 @@ if ($_POST) {
         <input type="text" name="email" id="email">
 
         <label>Contraseña</label>
-        <input type="text" name="password" id="password">
+        <input type="password" name="password" id="password">
 
         <button class="btn waves-effect waves-light" type="submit">Agregar Usuario
     <i class="material-icons right">send</i>
