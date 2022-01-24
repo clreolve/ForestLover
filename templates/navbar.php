@@ -5,8 +5,8 @@ include_once('./templates/navbar.php');
 <?php if (isset($_SESSION['uid'])) { ?>
 
     <nav>
-        <div class="nav-wrapper teal darken-1">
-            <a href="./index.php" class="brand-logo">Forest Lover</a>
+        <div class="nav-wrapper light-green darken-1">
+            <a href="./index.php" class="brand-logo">Forest Lover 🌳</a>
             <a href="#" data-target="collapsable_menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="./galeria.php">Galeria</a></li>
@@ -22,7 +22,7 @@ include_once('./templates/navbar.php');
         </div>
     </nav>
 
-    <ul class="sidenav teal darken-1" id="collapsable_menu">
+    <ul class="sidenav light-green darken-1" id="collapsable_menu">
         <li><a class='white-text' href="./galeria.php">Galeria</a></li>
         <li><a  class='white-text' href="./explorar.php">Explorar</a></li>
         <li><a  class='white-text' href="./perfil.php">Perfil</a></li>
@@ -38,7 +38,7 @@ include_once('./templates/navbar.php');
 <?php } else { ?>
 
     <nav>
-        <div class="nav-wrapper teal darken-1">
+        <div class="nav-wrapper light-green darken-1">
             <a href="./index.php" class="brand-logo">Forest Lover</a>
             <a href="#" data-target="collapsable_menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -54,7 +54,7 @@ include_once('./templates/navbar.php');
         </div>
     </nav>
 
-    <ul class="sidenav teal darken-1" id="collapsable_menu">
+    <ul class="sidenav light-green darken-1" id="collapsable_menu">
         <li><a class='white-text' href="./galeria.php">Galeria</a></li>
         <li><a class='white-text' href="./galeria.php">Explorar</a></li>
         <li><a class='white-text' href="./login.php">Inicie Sesion</a></li>
