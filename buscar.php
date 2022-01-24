@@ -40,7 +40,7 @@ function search(){
     return [];
 }
 
-function matchText($texto){
+/*function matchText($texto){
     if($_GET){
         if(isset($_GET[$texto])){
             $ntexto = strval($_GET[$texto]);
@@ -49,6 +49,6 @@ function matchText($texto){
     }  
     return [];
 }
-
+**/
 debug(search());
 ?>
