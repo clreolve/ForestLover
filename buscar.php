@@ -20,10 +20,12 @@ function search(){
 
         }else if(isset($_GET['text'])){
 
+            $ntexto = strval($_GET['text']);
+            return json_decode(get_commits_by_text($ntexto));
+
 
         }else if(isset($_GET['specie'])){
 
-            
             $id_specie = intval($_GET['specie']);
             return json_decode(get_image_species($id_specie));
 
