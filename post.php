@@ -184,17 +184,34 @@ include_once('./templates/header.php');
     <section class="row s12 m12">
         <div class="card">
             <div class="card-content">
+
+                <?php
+                if (isset($_SESSION['uid'])) {
+                ?>
+                    <form action="./add_comment" method="post">
+                        <input type="text" name="text" id="text" placeholder="Comentario nuevo">
+                        <button class="btn">Enviar</button>
+                    </form>
+                <?php
+                }
+                ?>
+
                 <h4>Comentarios</h4>
                 <?php
                 $commentarios = json_decode(image_comments($id_imagen));
                 foreach ($commentarios as $k => $c) {
                     $id_c = $c->id_comentario;
-                    $id_text = $c->texto;
-                    $user = $c->email; 
+                    $text = $c->texto;
+                    $user = $c->email;
+                    $fecha = $c->fecha;
                 ?>
-                <div class="card-content">
-
-                </div>
+                    <div class="card-content">
+                        <div>
+                            <p class="teal-text"><b>@<?php echo $user; ?></b> - <?php echo fecha($fecha); ?></p>
+                            <br>
+                            <p><?php echo $text; ?></p>
+                        </div>
+                    </div>
                 <?php
                 }
                 ?>
