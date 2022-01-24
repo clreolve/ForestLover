@@ -146,11 +146,16 @@ include_once('./templates/header.php');
                     <form class="row">
                         <div class="col s8 m8">
                             <label>Agregar Etiquetas</label>
-                            <select class="browser-default">
+                            <select id='tag' class="browser-default">
                                 <option value="" disabled selected>Elegir Etiquetas</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                                <?php
+                                $tags_disponibles = json_decode(tags_disponibles($id_imagen));
+                                foreach ($tags_disponibles as $key => $value) {
+                                ?>
+                                <option value="<?php echo $value->id_etiqueta ?>"><?php echo $value->nombre ?></option>
+                                <?php
+                                }
+    ?>
                             </select>
                             <a class="btn col s4 m4">Agregar</a>
                         </div>
