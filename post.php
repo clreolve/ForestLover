@@ -147,19 +147,22 @@ include_once('./templates/header.php');
                 if (is_image_owner($id_imagen)) { ?>
                     <form class="row">
                         <div class="col s8 m8">
-                            <label>Agregar Etiquetas</label>
-                            <select id='tag' class="browser-default">
-                                <option value="" disabled selected>Elegir Etiquetas</option>
-                                <?php
-                                $tags_disponibles = json_decode(tags_disponibles($id_imagen));
-                                foreach ($tags_disponibles as $key => $value) {
-                                ?>
-                                <option value="<?php echo $value->id_etiqueta ?>"><?php echo $value->nombre ?></option>
-                                <?php
-                                }
-    ?>
-                            </select>
-                            <a class="btn col s4 m4">Agregar</a>
+                            <form action="./addtag" method="get">
+                                <label>Agregar Etiquetas</label>
+                                <select id='tag' class="browser-default">
+                                    <option value="" disabled selected>Elegir Etiquetas</option>
+                                    <?php
+                                    $tags_disponibles = json_decode(tags_disponibles($id_imagen));
+                                    foreach ($tags_disponibles as $key => $value) {
+                                    ?>
+                                        <option value="<?php echo $value->id_etiqueta ?>"><?php echo $value->nombre ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+
+                                <button class="btn col s4 m4">Agregar</button>
+                            </form>
                         </div>
                     </form>
                     <br>
@@ -178,6 +181,26 @@ include_once('./templates/header.php');
             </div>
     </section>
 
+    <section class="row s12 m12">
+        <div class="card">
+            <div class="card-content">
+                <h4>Comentarios</h4>
+                <?php
+                $commentarios = json_decode(image_comments($id_imagen));
+                foreach ($commentarios as $k => $c) {
+                    $id_c = $c->id_comentario;
+                    $id_text = $c->texto;
+                    $user = $c->email; 
+                ?>
+                <div class="card-content">
+
+                </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+    </section>
 </body>
 
 <?php include_once('./templates/footer.php'); ?>
