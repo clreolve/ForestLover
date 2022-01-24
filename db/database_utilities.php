@@ -461,7 +461,7 @@ function add_comentario($id_usuario, $texto, $id_imagen)
 	$id_usuario = filter_var($id_usuario, FILTER_SANITIZE_SPECIAL_CHARS);
 	$texto = filter_var($texto, FILTER_SANITIZE_SPECIAL_CHARS);
 	$id_imagen = filter_var($id_imagen, FILTER_SANITIZE_SPECIAL_CHARS);
-	$sql = "INSERT INTO comentario (id_comentario, id_usuario, texto, id_imagen, fecha) VALUES (NULL, {$id_usuario} , {$texto}, {$id_imagen}, current_timestamp());";
+	$sql = "INSERT INTO comentario (id_usuario, texto, id_imagen) VALUES ({#id_usuario} , '{$text}' , {$id_imagen});";
 	$mysqli->query($sql);
 }
 
