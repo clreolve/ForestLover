@@ -188,7 +188,7 @@ include_once('./templates/header.php');
                 <?php
                 if (isset($_SESSION['uid'])) {
                 ?>
-                    <form action="./add_comment.php" method="post">
+                    <form action="./add_comment.php"  method="POST">
                         <input type="text" name="text" id="text" placeholder="Comentario nuevo">
                         <input type="hidden" name="id_imagen" value="<?php echo $id_imagen;?>">
                         <button class="btn">Enviar</button>
