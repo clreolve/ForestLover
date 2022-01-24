@@ -32,11 +32,6 @@ function search()
             $id_bosque = intval($_GET['forest']);
             return json_decode(get_image_bosque($id_bosque));
         }
-
-        if (!isset($_GET['page'])) {
-            header($redireccion);
-            exit();
-        }
     }
     return [];
 }
