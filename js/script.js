@@ -28,6 +28,7 @@ function like(id_imagen){
 
 function delete_tag(id_imagen,id_tag){
   $.post(`./delete_tag.php?tag=${id_tag}&id=${id_imagen}`, {id_tag: id_tag, id_imagen:id_imagen}).done(function(data) {
+    $(`#tag-${id_tag}`).remove();
     console.log(data);
   });
 }

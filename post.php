@@ -142,12 +142,27 @@ include_once('./templates/header.php');
                 <h4>Categorias:</h4>
                 <?php
                 $tags = json_decode(image_tags(intval($id_imagen)));
+                if (is_image_owner($id_imagen)) { ?>
+                    <form class="row">
+                        <div class="col s8 m8">
+                            <label>Agregar Etiquetas</label>
+                            <select class="browser-default">
+                                <option value="" disabled selected>Elegir Etiquetas</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                            <a class="btn col s4 m4">Agregar</a>
+                        </div>
+                    </form>
+                    <br>
+                <?php }
                 foreach ($tags as $index => $tag) {
                 ?>
                     <div id='tag-<?php echo $tag->id_etiqueta ?>' class="col s4 m4 ">
                         <a class="btn"><?php echo $tag->nombre ?></a>
                         <?php if (is_image_owner($id_imagen)) { ?>
-                            <a class="btn" onclick="delete_tag(<?php echo $tag->id_etiqueta ?>,<?php echo $id_imagen ?>)">
+                            <a class="btn" onclick="delete_tag(<?php echo $id_imagen ?>,<?php echo $tag->id_etiqueta ?>)">
                                 <i class="material-icons">delete</i>
                             </a>
                         <?php } ?>

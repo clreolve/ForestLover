@@ -52,3 +52,8 @@
   height: 300px;
 }
 
+.hideDiv
+{
+    display:none;
+}
+
