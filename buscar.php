@@ -89,7 +89,30 @@ function get_ncomments($id_imagen)
     <?php
     include_once('./templates/navbar.php');
     ?>
+    <section>
 
+        <div class="card">
+
+            <div class="card-content">
+
+                <div class="card col s12 m6">
+        
+                    <form action="./buscar.php" method="GET">
+
+                
+                        <input type="text" name="text" id="text">
+
+                        
+                        <button class="btn waves-effect waves-light" type="submit" >Buscar
+                            <i class="material-icons right">search</i>
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
     <section>
         <div class="row s12 m12">
             <!-- Div de las Imagenes-->
@@ -180,18 +203,18 @@ function get_ncomments($id_imagen)
                 //$is_previus_page && $is_next_page
                 $location = "";
                 foreach ($_GET as $key => $value) {
-                    if($key != 'page'){
+                    if ($key != 'page') {
                         $location = $location . "&{$key}={$value}";
                     }
                 }
-                if ($is_next_page && $is_previus_page) { 
-                    ?>
+                if ($is_next_page && $is_previus_page) {
+                ?>
                     <nav>
                         <div class="nav-wrapper teal darken-1">
                             <ul id="nav-mobile" class="right">
-                                <li><a href="./buscar.php?page=<?php echo ($page - 1).$location ?>">
+                                <li><a href="./buscar.php?page=<?php echo ($page - 1) . $location ?>">
                                         Anterior</a></li>
-                                <li><a href="./buscar.php?page=<?php echo ($page + 1).$location  ?>">Siguiente</a></li>
+                                <li><a href="./buscar.php?page=<?php echo ($page + 1) . $location  ?>">Siguiente</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -200,7 +223,7 @@ function get_ncomments($id_imagen)
                     <nav>
                         <div class="nav-wrapper teal darken-1">
                             <ul id="nav-mobile" class="right">
-                                <li><a href="./buscar.php?page=<?php echo ($page - 1).$location  ?>">Anterior</a></li>
+                                <li><a href="./buscar.php?page=<?php echo ($page - 1) . $location  ?>">Anterior</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -208,7 +231,7 @@ function get_ncomments($id_imagen)
                     <nav>
                         <div class="nav-wrapper teal darken-1">
                             <ul id="nav-mobile" class="right">
-                                <li><a href="./buscar.php?page=<?php echo ($page + 1).$location  ?>">Siguiente</a></li>
+                                <li><a href="./buscar.php?page=<?php echo ($page + 1) . $location  ?>">Siguiente</a></li>
                             </ul>
                         </div>
                     </nav>
