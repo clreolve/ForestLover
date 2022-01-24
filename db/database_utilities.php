@@ -551,3 +551,35 @@ d	la variable correspondiente es de tipo double
 s	la variable correspondiente es de tipo string
 b	la variable correspondiente es un blob y se envía en paquetes
 */
+
+function top10_image()
+{
+	global $mysqli;
+
+	$sql = "SELECT * FROM bosque_nlikes ORDER BY nlikes DESC LIMIT 10;";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
+	}
+
+	return json_encode($return);
+}
+
+function tags_disponibles($id_imagen){
+
+	global $mysqli;
+
+	$sql = "SELECT id_etiqueta, nombre FROM etiqueta 
+	WHERE NOT EXISTS (SELECT * FROM etiqueta_imagen WHERE etiqueta_imagen.id_imagen = {$id_imagen} AND etiqueta_imagen.id_etiqueta = etiqueta.id_etiqueta);";
+	$result = $mysqli->query($sql);
+
+	$return = [];
+	while ($e = $result->fetch_assoc()) {
+		array_push($return, $e);
+	}
+
+	return json_encode($return);
+
+}
