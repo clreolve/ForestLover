@@ -528,26 +528,27 @@ function top10_bosque()
 	return json_encode($return);
 }
 
-function get_image_bosque($id_bosque){
+function get_image_bosque($id_bosque)
+{
 
 	global $mysqli;
-	
+
 	$sql = "SELECT id_imagen FROM bosque_imagen WHERE id_bosque ={$id_bosque} ORDER BY id_imagen DESC;";
 	$result = $mysqli->query($sql);
 
 	$return = [];
 
-	while($e = $result->fetch_assoc()){
+	while ($e = $result->fetch_assoc()) {
 		array_push($return, $e);
-
 	}
 	return json_encode($return);
 }
 
-function get_commits_by_text($texto){
+function get_commits_by_text($texto)
+{
 	global $mysqli;
 
-	$sql = "SELECT * FROM imagen WHERE descripcion LIKE '%$texto%';";
+	$sql = "SELECT * FROM `imagen` WHERE `descripcion` LIKE '%{$texto}%';";
 	$result = $mysqli->query($sql);
 
 	$return = [];
@@ -556,7 +557,6 @@ function get_commits_by_text($texto){
 	}
 
 	return json_encode($return);
-
 }
 
 /*
@@ -583,7 +583,8 @@ function top10_image()
 	return json_encode($return);
 }
 
-function tags_disponibles($id_imagen){
+function tags_disponibles($id_imagen)
+{
 
 	global $mysqli;
 
@@ -597,5 +598,4 @@ function tags_disponibles($id_imagen){
 	}
 
 	return json_encode($return);
-
 }
