@@ -189,7 +189,7 @@ function image_comments($id_imagen)
 {
 	global $mysqli;
 
-	$sql = "SELECT comentario.id_comentario, comentario.texto, comentario.id_usuario, comentario.fecha ,user.email  FROM comentario INNER JOIN user ON comentario.id_usuario = user.id WHERE comentario.id_imagen = {$id_imagen}";
+	$sql = "SELECT comentario.id_comentario, comentario.texto, comentario.id_usuario, comentario.fecha,user.email  FROM comentario INNER JOIN user ON comentario.id_usuario = user.id WHERE comentario.id_imagen = {$id_imagen}";
 	$result = $mysqli->query($sql);
 
 	$return = [];
