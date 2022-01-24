@@ -176,7 +176,7 @@ function get_ncomments($id_imagen)
             </div>
 
             <!-- Div de Derecho-->
-            <div class="col s12 m4" style="background-color: green;">
+            <div class="col s12 m4">
 
                 <!-- Div de Cargar Imagenes-->
                 <div class="card">

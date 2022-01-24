@@ -547,7 +547,7 @@ function get_image_bosque($id_bosque){
 function get_commits_by_text($texto){
 	global $mysqli;
 
-	$sql = "SELECT * FROM comentario WHERE texto LIKE '%$texto%';";
+	$sql = "SELECT * FROM imagen WHERE descripcion LIKE '%$texto%';";
 	$result = $mysqli->query($sql);
 
 	$return = [];
