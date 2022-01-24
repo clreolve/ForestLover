@@ -17,6 +17,14 @@ function search()
             return json_decode(get_image_tags($id_etiqueta));
 
         } else if (isset($_GET['text'])) {
+<<<<<<< Updated upstream
+=======
+            
+            if (!isset($_GET['page'])) {
+                header("location: ./buscar.php?page=1&text={$_GET['text']}");
+                exit();
+            }
+>>>>>>> Stashed changes
 
             $ntexto = $_GET['text'];
 
