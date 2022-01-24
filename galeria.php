@@ -148,7 +148,7 @@ function get_ncomments($id_imagen)
                 if ($is_next_page && $is_previus_page) { ?>
                     <nav>
                         <div class="nav-wrapper">
-                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <ul id="nav-mobile" class="right">
                                 <li><a href="./galeria.php?page=<?php echo $page - 1 ?>">
                                         Anterior</a></li>
                                 <li><a href="./galeria.php?page=<?php echo $page + 1 ?>">Siguiente</a></li>
@@ -159,7 +159,7 @@ function get_ncomments($id_imagen)
                 } else if ($is_previus_page) { ?>
                     <nav>
                         <div class="nav-wrapper">
-                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <ul id="nav-mobile" class="right">
                                 <li><a href="./galeria.php?page=<?php echo $page - 1 ?>">Anterior</a></li>
                             </ul>
                         </div>
@@ -167,7 +167,7 @@ function get_ncomments($id_imagen)
                 <?php } else if ($is_next_page) { ?>
                     <nav>
                         <div class="nav-wrapper">
-                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <ul id="nav-mobile" class="right">
                                 <li><a href="./galeria.php?page=<?php echo $page + 1 ?>">Siguiente</a></li>
                             </ul>
                         </div>
