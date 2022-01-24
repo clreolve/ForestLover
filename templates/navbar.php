@@ -14,7 +14,7 @@ include_once('./templates/navbar.php');
                 <li><a href="./perfil.php">Perfil</a></li>
                 <li><a href="./logout.php">Salir</a></li>
                 <li>
-                    <a href="search.php">
+                    <a href="./buscar.php?text=">
                         <i class="material-icons">search</i>
                     </a>
                 </li>
@@ -28,7 +28,7 @@ include_once('./templates/navbar.php');
         <li><a  class='white-text' href="./perfil.php">Perfil</a></li>
         <li><a   class='white-text' href="./logout.php">Salir</a></li>
         <li>
-            <a  class='white-text' href="search.php">
+            <a  class='white-text' href="./buscar.php?text=">
                 <i class="material-icons white-text">search</i>
             </a>
         </li>
@@ -46,7 +46,7 @@ include_once('./templates/navbar.php');
                 <li><a href="./galeria.php">Explorar</a></li>
                 <li><a href="./login.php">Inicie Sesion</a></li>
                 <li>
-                    <a href="search.php">
+                    <a href="./buscar.php?text=*">
                         <i class="material-icons">search</i>
                     </a>
                 </li>
@@ -59,7 +59,7 @@ include_once('./templates/navbar.php');
         <li><a class='white-text' href="./galeria.php">Explorar</a></li>
         <li><a class='white-text' href="./login.php">Inicie Sesion</a></li>
         <li>
-            <a class='white-text' href="search.php">
+            <a class='white-text' href="./buscar.php?text=*">
                 <i class="material-icons white-text">search</i>
             </a>
         </li>
