@@ -548,7 +548,7 @@ function get_commits_by_text($texto)
 {
 	global $mysqli;
 
-	$sql = "SELECT * FROM `imagen` WHERE `descripcion` LIKE '%{$texto}%';";
+	$sql = "SELECT id_imagen FROM imagen WHERE descripcion LIKE '%{$texto}%';";
 	$result = $mysqli->query($sql);
 
 	$return = [];
